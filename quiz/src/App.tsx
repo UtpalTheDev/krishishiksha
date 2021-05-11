@@ -1,5 +1,5 @@
-import { useReducer, useState } from "react";
-import "./App.css"
+import { useEffect, useReducer, useState } from "react";
+import "./App.css";
 import { quizOne } from "./Data/getQuiz";
 
 type Headerprops = {
@@ -29,80 +29,119 @@ function printmemo(memo: Memo) {
 type quizstate = {
   score: number;
   status: statustype;
+  currentQsnNo: number;
 };
-const initialstate: quizstate = { score: 0, status: "starting" };
-
+const initialstate: quizstate = {
+  score: 0,
+  status: "starting",
+  currentQsnNo: 1
+};
 
 type actiontype =
   | { type: "RESET" }
-  | { type: "INCREMENT"; payload: { score: number } };
+  | { type: "INCREMENT_SCORE"; payload: { score: number } }
+  | { type: "DECREMENT_SCORE"; payload: { score: number } }
+  | { type: "SKIP" };
 
-function quizreducer(state: typeof initialstate, action: actiontype) {
+function quizreducer(state: quizstate, action: actiontype): quizstate {
   switch (action.type) {
     case "RESET":
-      return { ...state };
+      return { ...state, score: 0, status: "starting", currentQsnNo: 1 };
 
-    case "INCREMENT":
-      return { ...state, score: action.payload.score };
+    case "INCREMENT_SCORE":
+      return {
+        ...state,
+        score: state.score + action.payload.score,
+        currentQsnNo: state.currentQsnNo + 1
+      };
 
+    case "DECREMENT_SCORE":
+      return {
+        ...state,
+        score: state.score - action.payload.score,
+        currentQsnNo: state.currentQsnNo + 1
+      };
+    case "SKIP":
+      return {
+        ...state,
+        score: state.score,
+        currentQsnNo: state.currentQsnNo + 1
+      };
     default:
       return state;
   }
 }
 
 export default function App() {
-  let [score, setscore] = useState(0);
-  let [currentqsnno, setcurrentqsnno] = useState(1);
-  const [status, setstatus] = useState<statustype>("starting");
+  // let [score, setscore] = useState(0);
+  // let [currentqsnno, setcurrentqsnno] = useState(1);
+  // const [status, setstatus] = useState<statustype>("starting");
+  const [time, settime] = useState(15);
+  //let time = 1000;
   let [state, dispatch] = useReducer(quizreducer, initialstate);
+  //console.log("log", quizOne.questions[state.currentQsnNo - 1]);
+  useEffect(() => {
+    let timer = setInterval(() => {
+      settime((prev) => {
+        if (prev === 1) {
+          dispatch({ type: "SKIP" });
+          clearInterval(timer);
+          console.log("end");
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  }, []);
+  function Qsnblock() {
+    let { question, options, points } = quizOne.questions[
+      state.currentQsnNo - 1
+    ];
+    return (
+      <>
+        <h5>{question}</h5>
+        {time}
+        <h6>Number of point- {points}</h6>
+        {options.map((item, index) => {
+          return (
+            <>
+              <button
+                onClick={() => {
+                  if (item.isRight === true) {
+                    dispatch({
+                      type: "DECREMENT_SCORE",
+                      payload: { score: points }
+                    });
+                  } else {
+                    dispatch({
+                      type: "INCREMENT_SCORE",
+                      payload: { score: points }
+                    });
+                  }
+                }}
+              >
+                {`${index}. ${item.text}`}
+              </button>
+            </>
+          );
+        })}
+      </>
+    );
+  }
+
   return (
     <div className="App">
-      <Header username={"jdk"} score={score} />
-      <h4>current qsn no-{currentqsnno}</h4>
-      {status}
+      <Header username={"jdk"} score={state.score} />
+      <h4>current qsn no-{state.currentQsnNo}</h4>
+      {state.status}
       <br />
 
-      {printmemo(memo)}
-      <br />
-      {quizOne.questions.map(item => {
-        return (<>
-          <h5>{item.question}</h5>
-          {item.options.map((item1, index) => {
-            return (
-              <>
-                <button
-                  onClick={() => {
-                    if (item1.isRight === true) { setscore((prev) => prev + 1); }
-                    else {
-                      setscore((prev) => prev - 1)
-                    }
-
-                    setcurrentqsnno((prev) => prev + 1);
-                  }}
-                >
-                  {`${index}. ${item1.text}`}
-                </button>
-
-                <br />
-              </>
-            )
-          })}
-        </>)
-      })}
-      <br />
+      {state.currentQsnNo - 1 < quizOne.questions.length
+        ? Qsnblock()
+        : "Thanks for joining"}
 
       <button
         onClick={() => {
-          setscore((prev) => prev - 1);
-          setcurrentqsnno((prev) => prev + 1);
-        }}
-      >
-        no
-      </button>
-      <button
-        onClick={() => {
-          setscore(0);
-          setcurrentqsnno(1);
+          dispatch({ type: "RESET" });
         }}
       >
         reset

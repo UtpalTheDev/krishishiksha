@@ -17,14 +17,6 @@ function Header({ username, score }: Headerprops) {
   );
 }
 type statustype = "starting" | "finished" | "reset";
-type Memo = string | number;
-let memo: Memo = 55;
-function printmemo(memo: Memo) {
-  if (typeof memo === "string") {
-    return memo + "ll";
-  }
-  return memo + 5;
-}
 
 type quizstate = {
   score: number;
@@ -62,6 +54,11 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
         currentQsnNo: state.currentQsnNo + 1
       };
     case "SKIP":
+      console.log({
+        ...state,
+        score: state.score,
+        currentQsnNo: state.currentQsnNo + 1
+      });
       return {
         ...state,
         score: state.score,
@@ -71,8 +68,9 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
       return state;
   }
 }
-
+console.log("lpop");
 export default function App() {
+  console.log("render");
   // let [score, setscore] = useState(0);
   // let [currentqsnno, setcurrentqsnno] = useState(1);
   // const [status, setstatus] = useState<statustype>("starting");
@@ -80,19 +78,30 @@ export default function App() {
   //let time = 1000;
   let [state, dispatch] = useReducer(quizreducer, initialstate);
   //console.log("log", quizOne.questions[state.currentQsnNo - 1]);
+  console.log(state.currentQsnNo, time);
+
   useEffect(() => {
+    settime(15);
     let timer = setInterval(() => {
       settime((prev) => {
-        if (prev === 1) {
-          dispatch({ type: "SKIP" });
+        if (prev === 0) {
           clearInterval(timer);
           console.log("end");
         }
         return prev - 1;
       });
     }, 1000);
-  }, []);
+    let timer1 = setTimeout(() => {
+      dispatch({ type: "SKIP" });
+    }, 15000);
+    return () => {
+      console.log("neweffect");
+      clearInterval(timer);
+      clearTimeout(timer1);
+    };
+  }, [state.currentQsnNo]);
   function Qsnblock() {
+    console.log("qsnb", state.currentQsnNo - 1);
     let { question, options, points } = quizOne.questions[
       state.currentQsnNo - 1
     ];
@@ -135,9 +144,11 @@ export default function App() {
       {state.status}
       <br />
 
-      {state.currentQsnNo - 1 < quizOne.questions.length
-        ? Qsnblock()
-        : "Thanks for joining"}
+      {state.currentQsnNo <= quizOne.questions.length ? (
+        <Qsnblock />
+      ) : (
+        "thank you"
+      )}
 
       <button
         onClick={() => {

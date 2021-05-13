@@ -69,83 +69,77 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
   }
 }
 console.log("lpop");
-export default function App() {
-  console.log("render");
-  // let [score, setscore] = useState(0);
-  // let [currentqsnno, setcurrentqsnno] = useState(1);
-  // const [status, setstatus] = useState<statustype>("starting");
-  const [time, settime] = useState(15);
-  //let time = 1000;
-  let [state, dispatch] = useReducer(quizreducer, initialstate);
-  //console.log("log", quizOne.questions[state.currentQsnNo - 1]);
-  console.log(state.currentQsnNo, time);
 
+function Qsnblock({ state, dispatch }: { state: quizstate; dispatch: any }) {
+  const [time, settime] = useState(15);
+  console.log("qsnblock");
   useEffect(() => {
-    settime(15);
+    console.log("effect");
     let timer = setInterval(() => {
-      settime((prev) => {
-        if (prev === 0) {
-          clearInterval(timer);
-          console.log("end");
-        }
-        return prev - 1;
-      });
+      settime((prev) => prev - 1);
     }, 1000);
-    let timer1 = setTimeout(() => {
+    console.log("time", time);
+    if (time === 0) {
       dispatch({ type: "SKIP" });
-    }, 15000);
+      settime(15);
+    }
     return () => {
       console.log("neweffect");
       clearInterval(timer);
-      clearTimeout(timer1);
     };
-  }, [state.currentQsnNo]);
-  function Qsnblock() {
-    console.log("qsnb", state.currentQsnNo - 1);
-    let { question, options, points } = quizOne.questions[
-      state.currentQsnNo - 1
-    ];
-    return (
-      <>
-        <h5>{question}</h5>
-        {time}
-        <h6>Number of point- {points}</h6>
-        {options.map((item, index) => {
-          return (
-            <>
-              <button
-                onClick={() => {
-                  if (item.isRight === true) {
-                    dispatch({
-                      type: "DECREMENT_SCORE",
-                      payload: { score: points }
-                    });
-                  } else {
-                    dispatch({
-                      type: "INCREMENT_SCORE",
-                      payload: { score: points }
-                    });
-                  }
-                }}
-              >
-                {`${index}. ${item.text}`}
-              </button>
-            </>
-          );
-        })}
-      </>
-    );
-  }
+  }, [dispatch, time]);
 
+  console.log("qsnb", state.currentQsnNo - 1);
+  let { question, options, points } = quizOne.questions[state.currentQsnNo - 1];
+  return (
+    <>
+      <h5>{question}</h5>
+      {time}
+      <h6>Number of point- {points}</h6>
+      {options.map((item, index) => {
+        return (
+          <>
+            <button
+              onClick={() => {
+                if (item.isRight === true) {
+                  dispatch({
+                    type: "DECREMENT_SCORE",
+                    payload: { score: points }
+                  });
+                  settime(15);
+                } else {
+                  dispatch({
+                    type: "INCREMENT_SCORE",
+                    payload: { score: points }
+                  });
+                  settime(15);
+                }
+              }}
+            >
+              {`${index}. ${item.text}`}
+            </button>
+          </>
+        );
+      })}
+    </>
+  );
+}
+export default function App() {
+  console.log("render");
+  let [state, dispatch] = useReducer(quizreducer, initialstate);
+
+  //console.log("render");
   return (
     <div className="App">
       <Header username={"jdk"} score={state.score} />
-      <h4>current qsn no-{state.currentQsnNo}</h4>
+      {state.currentQsnNo <= quizOne.questions.length && (
+        <h4>Qsn No- {state.currentQsnNo}</h4>
+      )}
       {state.status}
       <br />
 
       {state.currentQsnNo <= quizOne.questions.length ? (
-        <Qsnblock />
+        <Qsnblock state={state} dispatch={dispatch} />
       ) : (
         "thank you"
       )}

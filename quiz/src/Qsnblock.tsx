@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { quizOne } from "./Data/getQuiz";
+import { quizdata } from "./Data/getQuiz";
 import { useReduce } from "./Reducer-context";
-
-export function Qsnblock() {
+import { Quizdata, quiz } from "./Data/quiz.types";
+export function Qsnblock({ typedata }: { typedata: quiz }) {
   let { score, status, currentQsnNo, dispatch } = useReduce();
   const [time, settime] = useState(15);
 
@@ -20,7 +20,7 @@ export function Qsnblock() {
     };
   }, [dispatch, time]);
 
-  let { question, options, points } = quizOne.questions[currentQsnNo - 1];
+  let { question, options, points } = typedata.questions[currentQsnNo - 1];
   return (
     <>
       <h5>{question}</h5>
@@ -31,7 +31,7 @@ export function Qsnblock() {
           <>
             <button
               onClick={() => {
-                if (item.isRight === true) {
+                if (item.isRight === false) {
                   dispatch({
                     type: "DECREMENT_SCORE",
                     payload: { score: points }

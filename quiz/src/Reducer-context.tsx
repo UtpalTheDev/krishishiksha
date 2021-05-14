@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 
-import { quizOne } from "./Data/getQuiz";
-import { quiz } from "./Data/quiz.types";
+import { quizdata } from "./Data/getQuiz";
+import { Quizdata } from "./Data/quiz.types";
 import { useState } from "react";
 type statustype = "starting" | "finished" | "Running";
 
@@ -10,34 +10,37 @@ type quizstate = {
   score: number;
   status: statustype;
   currentQsnNo: number;
+  currentquiz: string;
   correct: number;
   wrong: number;
-  data: quiz;
+  data: Quizdata;
 };
 const initialstate: quizstate = {
   user: "",
   score: 0,
   status: "starting",
   currentQsnNo: 1,
+  currentquiz: "",
   correct: 0,
   wrong: 0,
-  data: quizOne
+  data: quizdata
 };
 type actiontype =
   | { type: "RESET" }
   | { type: "INCREMENT_SCORE"; payload: { score: number } }
   | { type: "DECREMENT_SCORE"; payload: { score: number } }
   | { type: "SKIP" }
-  | { type: "USER"; payload: string };
-
+  | { type: "USER"; payload: string }
+  | { type: "CURRENTQUIZ"; payload: string };
 type Contextstate = {
   user: string;
   score: number;
   status: statustype;
   currentQsnNo: number;
+  currentquiz: string;
   correct: number;
   wrong: number;
-  data: quiz;
+  data: Quizdata;
   dispatch: React.Dispatch<actiontype>;
 };
 
@@ -47,7 +50,8 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
   switch (action.type) {
     case "USER":
       return { ...state, user: action.payload };
-
+    case "CURRENTQUIZ":
+      return { ...state, currentquiz: action.payload };
     case "RESET":
       return {
         ...state,
@@ -59,7 +63,10 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
       };
 
     case "INCREMENT_SCORE":
-      if (state.currentQsnNo + 1 <= state.data.questions.length) {
+      if (
+        state.currentQsnNo + 1 <=
+        state.data[state.currentquiz].questions.length
+      ) {
         return {
           ...state,
           score: state.score + action.payload.score,
@@ -77,7 +84,10 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
       };
 
     case "DECREMENT_SCORE":
-      if (state.currentQsnNo + 1 <= state.data.questions.length) {
+      if (
+        state.currentQsnNo + 1 <=
+        state.data[state.currentquiz].questions.length
+      ) {
         return {
           ...state,
           score: state.score - action.payload.score,
@@ -94,7 +104,10 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
         wrong: state.wrong + 1
       };
     case "SKIP":
-      if (state.currentQsnNo + 1 <= state.data.questions.length)
+      if (
+        state.currentQsnNo + 1 <=
+        state.data[state.currentquiz].questions.length
+      )
         return {
           ...state,
           score: state.score,
@@ -114,7 +127,7 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 
 export function Contextprovider({ children }: { children: any }) {
   let [
-    { user, score, status, currentQsnNo, correct, wrong, data },
+    { user, score, currentquiz, status, currentQsnNo, correct, wrong, data },
     dispatch
   ] = useReducer(quizreducer, initialstate);
 
@@ -124,6 +137,7 @@ export function Contextprovider({ children }: { children: any }) {
         score,
         status,
         currentQsnNo,
+        currentquiz,
         user,
         correct,
         wrong,

@@ -13,7 +13,7 @@ export function Login() {
     <>
       <h1>login</h1>
       <input onChange={inputhandler} />
-      <Link to="questions">
+      <Link to="home">
         <button onClick={() => dispatch({ type: "USER", payload: text })}>
           Go
         </button>

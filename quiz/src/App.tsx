@@ -7,6 +7,7 @@ import { Statistics } from "./Statistics";
 import { Question } from "./Question";
 import { Routes, Route } from "react-router-dom";
 import { Login } from "./Login";
+import { Home } from "./Home";
 
 export default function App() {
   console.log("render");
@@ -15,7 +16,8 @@ export default function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/questions" element={<Question />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/:quiztype" element={<Question />} />
       </Routes>
     </div>
   );

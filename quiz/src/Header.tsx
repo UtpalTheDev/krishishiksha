@@ -1,21 +1,24 @@
 import { useReduce } from "./Reducer-context";
+import { quiz } from "./Data/quiz.types";
 
-type Headerprops = {
-  username: string;
-  score: number;
-};
-export function Header({ username, score }: Headerprops) {
+export function Header() {
   let {
     user,
+    score,
     status,
     currentQsnNo,
+    currentquiz,
     correct,
     wrong,
-    data: { questions }
+    data
   } = useReduce();
   function totalscore() {
-    return questions.reduce((total, item) => total + item.points, 0);
+    return data[currentquiz].questions.reduce(
+      (total, item) => total + item.points,
+      0
+    );
   }
+
   return (
     <>
       <h1>Quiz</h1>
@@ -25,7 +28,10 @@ export function Header({ username, score }: Headerprops) {
       </h2>
       {status !== "finished" && (
         <>
-          <h2> No of Qsn Left -{questions.length - currentQsnNo}</h2>
+          <h2>
+            {" "}
+            No of Qsn Left -{data[currentquiz].questions.length - currentQsnNo}
+          </h2>
         </>
       )}
     </>

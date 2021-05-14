@@ -6,6 +6,7 @@ import { useState } from "react";
 type statustype = "starting" | "finished" | "Running";
 
 type quizstate = {
+  user: string;
   score: number;
   status: statustype;
   currentQsnNo: number;
@@ -14,10 +15,10 @@ type quizstate = {
   data: quiz;
 };
 const initialstate: quizstate = {
+  user: "",
   score: 0,
   status: "starting",
   currentQsnNo: 1,
-
   correct: 0,
   wrong: 0,
   data: quizOne
@@ -27,14 +28,13 @@ type actiontype =
   | { type: "INCREMENT_SCORE"; payload: { score: number } }
   | { type: "DECREMENT_SCORE"; payload: { score: number } }
   | { type: "SKIP" }
-  | { type: "CORRECT" }
-  | { type: "WRONG" };
+  | { type: "USER"; payload: string };
 
 type Contextstate = {
+  user: string;
   score: number;
   status: statustype;
   currentQsnNo: number;
-
   correct: number;
   wrong: number;
   data: quiz;
@@ -45,6 +45,9 @@ export const Reducercontext = createContext({} as Contextstate);
 
 function quizreducer(state: quizstate, action: actiontype): quizstate {
   switch (action.type) {
+    case "USER":
+      return { ...state, user: action.payload };
+
     case "RESET":
       return {
         ...state,
@@ -111,7 +114,7 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 
 export function Contextprovider({ children }: { children: any }) {
   let [
-    { score, status, currentQsnNo, correct, wrong, data },
+    { user, score, status, currentQsnNo, correct, wrong, data },
     dispatch
   ] = useReducer(quizreducer, initialstate);
 
@@ -121,7 +124,7 @@ export function Contextprovider({ children }: { children: any }) {
         score,
         status,
         currentQsnNo,
-
+        user,
         correct,
         wrong,
         data,

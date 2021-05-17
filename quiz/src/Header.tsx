@@ -2,16 +2,7 @@ import { useReduce } from "./Reducer-context";
 import { quiz } from "./Data/quiz.types";
 
 export function Header() {
-  let {
-    user,
-    score,
-    status,
-    currentQsnNo,
-    currentquiz,
-    correct,
-    wrong,
-    data
-  } = useReduce();
+  let { user, score, status, currentQsnNo, currentquiz, data } = useReduce();
   function totalscore() {
     return data[currentquiz].questions.reduce(
       (total, item) => total + item.points,

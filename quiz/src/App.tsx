@@ -1,5 +1,4 @@
 import "./App.css";
-import { quizOne } from "./Data/getQuiz";
 import { Header } from "./Header";
 import { Qsnblock } from "./Qsnblock";
 import { useReduce } from "./Reducer-context";
@@ -8,7 +7,7 @@ import { Question } from "./Question";
 import { Routes, Route } from "react-router-dom";
 import { Login } from "./Login";
 import { Home } from "./Home";
-
+import { Privateroute } from "./Privateroute";
 export default function App() {
   console.log("render");
   console.log(useReduce());

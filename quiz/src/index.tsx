@@ -4,13 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Contextprovider } from "./Reducer-context";
+import {Loginprovider} from "./Login-context";
+
 import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <Contextprovider>
+      <Loginprovider>
       <Router>
         <App />
       </Router>
+      </Loginprovider>
     </Contextprovider>
   </React.StrictMode>,
   document.getElementById("root")

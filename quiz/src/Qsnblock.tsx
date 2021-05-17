@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { quizdata } from "./Data/getQuiz";
 import { useReduce } from "./Reducer-context";
 import { Quizdata, quiz } from "./Data/quiz.types";
+import axios from "axios";
 export function Qsnblock({ typedata }: { typedata: quiz }) {
-  let { score, status, currentQsnNo, dispatch } = useReduce();
+  let { score, status, currentQsnNo, dispatch, user } = useReduce();
   const [time, settime] = useState(15);
 
   useEffect(() => {

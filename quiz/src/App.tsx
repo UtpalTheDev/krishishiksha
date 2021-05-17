@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import { Login } from "./Login";
 import { Home } from "./Home";
 import { Privateroute } from "./Privateroute";
+import { Learninggraph } from "./Learninggraph";
 export default function App() {
   console.log("render");
   console.log(useReduce());
@@ -15,6 +16,7 @@ export default function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/learnincurve" element={<Learninggraph />} />
         <Route path="/home" element={<Home />} />
         <Route path="/:quiztype" element={<Question />} />
       </Routes>

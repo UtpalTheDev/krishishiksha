@@ -4,9 +4,14 @@ import { quizdata } from "./Data/getQuiz";
 import { Quizdata } from "./Data/quiz.types";
 import { useState } from "react";
 type statustype = "starting" | "finished" | "Running";
+type UserState = {
+  _id: string;
+  name: string;
+  email: string;
+};
 
 type quizstate = {
-  user: string;
+  user: UserState;
   score: number;
   status: statustype;
   currentQsnNo: number;
@@ -14,26 +19,29 @@ type quizstate = {
   correct: number;
   wrong: number;
   data: Quizdata;
+  categorydata: string[];
 };
 const initialstate: quizstate = {
-  user: "",
+  user: { _id: "", name: "", email: "" },
   score: 0,
   status: "starting",
   currentQsnNo: 1,
   currentquiz: "",
   correct: 0,
   wrong: 0,
-  data: quizdata
+  data: quizdata,
+  categorydata: Object.keys(quizdata)
 };
 type actiontype =
   | { type: "RESET" }
   | { type: "INCREMENT_SCORE"; payload: { score: number } }
   | { type: "DECREMENT_SCORE"; payload: { score: number } }
   | { type: "SKIP" }
-  | { type: "USER"; payload: string }
+  | { type: "USER"; payload: UserState }
   | { type: "CURRENTQUIZ"; payload: string };
 type Contextstate = {
-  user: string;
+  user: UserState;
+
   score: number;
   status: statustype;
   currentQsnNo: number;
@@ -41,6 +49,7 @@ type Contextstate = {
   correct: number;
   wrong: number;
   data: Quizdata;
+  categorydata: string[];
   dispatch: React.Dispatch<actiontype>;
 };
 
@@ -127,10 +136,20 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 
 export function Contextprovider({ children }: { children: any }) {
   let [
-    { user, score, currentquiz, status, currentQsnNo, correct, wrong, data },
+    {
+      user,
+      score,
+      currentquiz,
+      status,
+      currentQsnNo,
+      correct,
+      wrong,
+      data,
+      categorydata
+    },
     dispatch
   ] = useReducer(quizreducer, initialstate);
-
+  // console.log("kljj",categorydata)
   return (
     <Reducercontext.Provider
       value={{
@@ -142,6 +161,7 @@ export function Contextprovider({ children }: { children: any }) {
         correct,
         wrong,
         data,
+        categorydata,
         dispatch
       }}
     >

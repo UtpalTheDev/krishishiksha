@@ -13,7 +13,7 @@ export function Header() {
   return (
     <>
       <h1>Quiz</h1>
-      <h2>welcome-{user}</h2>
+      <h2>welcome-{user.name}</h2>
       <h2>
         score-{score}/{totalscore()}
       </h2>

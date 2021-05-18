@@ -18,6 +18,9 @@ export function Home() {
             >
               <div style={{ background: "#f2f2f2" }}>{item}</div>
             </Link>
+            <Link to={`/learningcurve/${item}`}>
+              {`${item} learning curve`}
+            </Link>
           </>
         );
       })}

@@ -38,17 +38,19 @@ export function Loginprovider({ children }: { children: any }) {
   }
 
   useEffect(() => {
+    console.log("running localstorage extraction");
     (async function () {
       try {
         const localgetdata = localStorage?.getItem("user");
         const localparsedata =
           localgetdata !== null ? JSON.parse(localgetdata) : {};
-        console.log("parsedata success", localparsedata);
+        // console.log("parsedata success", localparsedata);
 
         if ("login" in localparsedata) {
           let userdata = await verify(localparsedata.userid);
+          console.log("userdata", userdata);
           if ("name" in userdata) {
-            console.log("parsedata success");
+            //console.log("parsedata success");
 
             dispatch({ type: "USER", payload: userdata });
             setLogin(true);

@@ -1,11 +1,13 @@
 import { useReduce } from "./Reducer-context";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import Chart from "react-google-charts";
 export function Learninggraph() {
   let { data, user } = useReduce();
   let [statdata, setstatdata] = useState<any | null>(null);
   const initialdata = [["x", "coorect", "wrong"]];
+  const { category } = useParams();
   useEffect(() => {
     (async function () {
       console.log("id", user._id);
@@ -14,7 +16,7 @@ export function Learninggraph() {
           "https://quiz-backend-demo-1.utpalpati.repl.co/data/stat",
           {
             userid: user._id,
-            category: "Marvel"
+            category: category
           }
         );
         if (response.status === 200) {
@@ -24,16 +26,17 @@ export function Learninggraph() {
           setstatdata(null);
         };
       } catch (error) {
-        console.log("error");
+        console.log("grapherror", error);
       }
     })();
-  }, []);
+  }, [user]);
   console.log("kjkjj", statdata);
   return (
     <>
+      {!statdata && "loading"}
       {statdata && (
         <Chart
-          style={{ width: "600px" }}
+          style={{ minWidth: "400px", width: "100%", height: "300px" }}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={statdata}
@@ -42,7 +45,7 @@ export function Learninggraph() {
               title: "Date"
             },
             vAxis: {
-              title: "Performance"
+              title: "Score"
             },
             series: {
               1: { curveType: "function" }

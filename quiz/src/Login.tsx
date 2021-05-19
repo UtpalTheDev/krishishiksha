@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { Location } from "history";
+
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+
 export function Login() {
   let { dispatch, user } = useReduce();
   let { isUserLogin, setLogin } = useLogin();
@@ -71,21 +75,23 @@ export function Login() {
   }
   return (
     <>
-      <h1>login</h1>
-      <input placeholder="email id" value={email} onChange={emailhandler} />
-      <input
-        placeholder="password"
-        value={password}
-        onChange={passwordhandler}
-      />
+      <Box>
+        <h1>login</h1>
+        <input placeholder="email id" value={email} onChange={emailhandler} />
+        <input
+          placeholder="password"
+          value={password}
+          onChange={passwordhandler}
+        />
 
-      <button
-        onClick={() => {
-          userassign();
-        }}
-      >
-        Go
-      </button>
+        <Button
+          onClick={() => {
+            userassign();
+          }}
+        >
+          Go
+        </Button>
+      </Box>
     </>
   );
 }

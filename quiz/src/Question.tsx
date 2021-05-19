@@ -7,6 +7,9 @@ import axios from "axios";
 import { quizdata } from "./Data/getQuiz";
 import { useEffect } from "react";
 
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import RotateLeft from "@material-ui/icons/RotateLeft"
 export function Question() {
   let { quiztype } = useParams();
 
@@ -67,24 +70,29 @@ export function Question() {
   }, [status]);
   return (
     <>
-      <Header />
-      {status !== "finished" && <h4>Qsn No- {currentQsnNo}</h4>}
-      {status}
-      <br />
+      <Box>
+        <Header />
+        {status !== "finished" && <h4>Qsn No- {currentQsnNo}</h4>}
+        {status}
+        <br />
 
-      {status !== "finished" ? (
-        <Qsnblock typedata={data[quiztype]} />
-      ) : (
-        <Statistics />
-      )}
-      <br />
-      <button
-        onClick={() => {
-          dispatch({ type: "RESET" });
-        }}
-      >
-        reset
-      </button>
+        {status !== "finished" ? (
+          <Qsnblock typedata={data[quiztype]} />
+        ) : (
+          <Statistics />
+        )}
+        <br />
+        <Button
+          variant="contained"
+          startIcon={<RotateLeft/>}
+          color="secondary"
+          onClick={() => {
+            dispatch({ type: "RESET" });
+          }}
+        >
+          reset
+        </Button>
+      </Box>
     </>
   );
 }

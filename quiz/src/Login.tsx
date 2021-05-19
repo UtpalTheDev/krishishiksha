@@ -5,8 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { Location } from "history";
 
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
+import {Button,Box,Grid,TextField} from "@material-ui/core";
+
 
 export function Login() {
   let { dispatch, user } = useReduce();
@@ -77,20 +77,34 @@ export function Login() {
     <>
       <Box>
         <h1>login</h1>
-        <input placeholder="email id" value={email} onChange={emailhandler} />
-        <input
-          placeholder="password"
+        <Grid container 
+        direction="column"
+        style={{marginBottom:"1rem"}}justify="center" alignItems="center" spacing={1}>
+        <Grid item>    <TextField id="standard-basic" value={email}  label="Email Id" onChange={emailhandler}/></Grid>  
+    
+        <Grid item>
+        <TextField
+          label="Password"
           value={password}
           onChange={passwordhandler}
-        />
-
+        /></Grid>
+        <Grid item>
         <Button
+        style={{marginTop:"1rem"}}
+          size="small"
+          color="primary"
+          variant="contained"
           onClick={() => {
             userassign();
           }}
         >
           Go
         </Button>
+        </Grid>
+        </Grid>
+
+
+
       </Box>
     </>
   );

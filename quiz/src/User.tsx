@@ -27,7 +27,7 @@ export function User() {
         );
         console.log("response", response.data);
         if (response.status === 200) {
-          response.data.map((item, index) => {
+          response.data.map((item:any, index:any) => {
             item[0] = new Date(item[0]);
             return item;
           });

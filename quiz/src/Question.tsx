@@ -7,8 +7,8 @@ import axios from "axios";
 import { quizdata } from "./Data/getQuiz";
 import { useEffect } from "react";
 
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
+import {Button,Box,Grid} from "@material-ui/core";
+
 import RotateLeft from "@material-ui/icons/RotateLeft"
 export function Question() {
   let { quiztype } = useParams();
@@ -82,8 +82,10 @@ export function Question() {
           <Statistics />
         )}
         <br />
+        <Grid container spacing={2} justify="center">
         <Button
           variant="contained"
+         
           startIcon={<RotateLeft/>}
           color="secondary"
           onClick={() => {
@@ -92,6 +94,7 @@ export function Question() {
         >
           reset
         </Button>
+        </Grid>
       </Box>
     </>
   );

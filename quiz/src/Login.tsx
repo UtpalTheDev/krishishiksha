@@ -47,7 +47,7 @@ export function Login() {
   async function verify(): Promise<User | Servererror> {
     try {
       let response = await axios.post(
-        "https://quiz-backend-demo-1.utpalpati.repl.co/user/info",
+        "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithcred",
         { email: email, password: password }
       );
       return response.data;

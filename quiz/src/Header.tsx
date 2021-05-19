@@ -1,5 +1,6 @@
 import { useReduce } from "./Reducer-context";
 import { quiz } from "./Data/quiz.types";
+import {Button,Box,Grid} from "@material-ui/core";
 
 export function Header() {
   let { user, score, status, currentQsnNo, currentquiz, data } = useReduce();
@@ -11,9 +12,11 @@ export function Header() {
   }
 
   return (
-    <>
-      <h1>Quiz</h1>
+    <Box textAlign="center">
       <h2>welcome-{user.name}</h2>
+    <Grid container justify="space-between" alignItems="center">
+      
+      
       <h2>
         score-{score}/{totalscore()}
       </h2>
@@ -25,6 +28,8 @@ export function Header() {
           </h2>
         </>
       )}
-    </>
+    </Grid>
+    <h1>Quiz</h1>
+    </Box>
   );
 }

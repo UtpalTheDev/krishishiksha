@@ -28,17 +28,18 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
 
   return (
     <>
-      <Box>
-        <h5>{question}</h5>
+      <Box textAlign="center">
+        <h2>{question}</h2>
         {time}
         <h6>Number of point- {points}</h6>
         <Grid container spacing={3} justify="center">
           {options.map((item, index) => {
             return (
-              <>
-                <Grid item sm={12}>
+              
+                <Grid item xs={12} sm={6}>
                   <Button
                     variant="outlined"
+                    style={{width:"100%"}}
                     color="primary"
                     onClick={() => {
                       if (item.isRight === false) {
@@ -56,10 +57,10 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
                       }
                     }}
                   >
-                    {`${index}. ${item.text}`}
+                    {` ${item.text}`}
                   </Button>
                 </Grid>
-              </>
+              
             );
           })}
         </Grid>

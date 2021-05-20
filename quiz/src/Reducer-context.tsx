@@ -38,7 +38,8 @@ type actiontype =
   | { type: "DECREMENT_SCORE"; payload: { score: number } }
   | { type: "SKIP" }
   | { type: "USER"; payload: UserState }
-  | { type: "CURRENTQUIZ"; payload: string };
+  | { type: "CURRENTQUIZ"; payload: string }
+  | {type: "LOGOUT"}
 type Contextstate = {
   user: UserState;
 
@@ -56,6 +57,7 @@ type Contextstate = {
 export const Reducercontext = createContext({} as Contextstate);
 
 function quizreducer(state: quizstate, action: actiontype): quizstate {
+  console.log("reducer");
   switch (action.type) {
     case "USER":
       return { ...state, user: action.payload };
@@ -70,7 +72,19 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
         correct: 0,
         wrong: 0
       };
-
+    case "LOGOUT":
+      return{
+        ...state,
+        user:{_id:"",name:"",email:""},
+        score: 0,
+        status: "starting",
+        currentQsnNo: 1,
+        currentquiz: "",
+        correct: 0,
+        wrong: 0,
+        data: quizdata,
+        categorydata: Object.keys(quizdata)
+      }
     case "INCREMENT_SCORE":
       if (
         state.currentQsnNo + 1 <=
@@ -135,6 +149,7 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 }
 
 export function Contextprovider({ children }: { children: any }) {
+  console.log("reduce context")
   let [
     {
       user,

@@ -1,9 +1,19 @@
 import { useReduce } from "./Reducer-context";
 import { useLogin } from "./Login-context";
 import { Link } from "react-router-dom";
-import{AppBar,Toolbar,IconButton,Avatar,Grid} from "@material-ui/core";
+import{AppBar,Toolbar,IconButton,Avatar,Grid,Button} from "@material-ui/core";
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 export function Navbar() {
+  const {user,dispatch} =useReduce();
+  const {isUserLogin,setLogin}=useLogin();
+
+function logout(){
+  localStorage.removeItem("user");
+  dispatch({type:"LOGOUT"});
+  setLogin(false);
+}
+console.log("here me",user);
+
   return (
     <>
       <div>
@@ -11,10 +21,20 @@ export function Navbar() {
         <AppBar>
           <Toolbar>
             <Grid container justify="space-between" alignItems="center">
+            <Link to="/" style={{textDecoration:"none", color:"inherit"}}>
             <h3>Quiz</h3>
-            <IconButton href="/user">
+            </Link>
+
+            <Grid item>
+            {isUserLogin && <Button variant="contained" size="small" onClick={logout}>Logout</Button>}
+
+            <Link to="/user" style={{textDecoration:"none", color:"inherit"}}><IconButton>
               <AccountCircleRoundedIcon/>
             </IconButton>
+            {user.name!==""?`Hi, ${user.name}`:""}
+            </Link>
+            </Grid>
+
             </Grid>
           </Toolbar>
         </AppBar>

@@ -7,6 +7,6 @@ export function Privateroute({ path, ...props }: any) {
   return isUserLogin ? (
     <Route {...props} path={path} />
   ) : (
-    <Navigate state={{ from: path }} replace to="/login" />
+    <Navigate state={path} replace to="/login" />
   );
 }

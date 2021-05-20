@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Chart from "react-google-charts";
+import {Box} from "@material-ui/core";
 export function Learninggraph() {
   let { data, user,currentquiz } = useReduce();
   let [statdata, setstatdata] = useState<any | null>(null);
@@ -30,10 +31,12 @@ export function Learninggraph() {
       }
     })();
   }, [user]);
-  console.log("kjkjj", statdata);
+  
   return (
     <>
       <h3>{category} Learning Graph</h3>
+      <Box textAlign="center">
+      <div>Past 7days data</div>
       {!statdata && "loading"}
       {statdata && (
         <Chart
@@ -55,6 +58,7 @@ export function Learninggraph() {
           rootProps={{ "data-testid": "2" }}
         />
       )}
+      </Box>
     </>
   );
 }

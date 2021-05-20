@@ -8,7 +8,7 @@ type Logincontextstate = {
 const Logincontext = createContext({} as Logincontextstate);
 
 export function Loginprovider({ children }: { children: any }) {
-  let { dispatch } = useReduce();
+  let { dispatch,user } = useReduce();
   const [isUserLogin, setLogin] = useState(false);
 
   type Servererror = {
@@ -44,7 +44,7 @@ export function Loginprovider({ children }: { children: any }) {
         const localgetdata = localStorage?.getItem("user");
         const localparsedata =
           localgetdata !== null ? JSON.parse(localgetdata) : {};
-        // console.log("parsedata success", localparsedata);
+         console.log("parsedata success", localparsedata);
 
         if ("login" in localparsedata) {
           let userdata = await verify(localparsedata.userid);

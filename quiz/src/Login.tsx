@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import Location  from "history";
 
-import {Button,Box,Grid,TextField} from "@material-ui/core";
+import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
 
 
 export function Login() {
@@ -14,7 +14,7 @@ export function Login() {
   const [Error,setError]=useState(false);
   let {state,pathname} = useLocation();
   let navigate = useNavigate();
-
+  const [Loading,setLoading]= useState(false);
   let [email, setemail] = useState("");
   let [password, setpassword] = useState("");
 
@@ -26,6 +26,7 @@ export function Login() {
   }
   useEffect(() => {
     navigationcall();
+    console.log("lnk")
   });
 
   // navigationcall();
@@ -73,8 +74,10 @@ console.log("error",Error);
     }
   }
   async function userassign() {
+    setLoading(true);
     if(email!==""&&password!==""){
     let userdata = await verify();
+    setLoading(false);
     userdata===null?setError(true):setError(false)
     if (userdata!==null && "name" in userdata) {
       localStorage.setItem(
@@ -84,7 +87,7 @@ console.log("error",Error);
       dispatch({ type: "USER", payload: userdata });
       setLogin((prev) => !prev);
     }
-    console.log(userdata);
+    console.log("login data",userdata);
   }
   }
   return (
@@ -111,17 +114,19 @@ console.log("error",Error);
           value={password}
           onChange={passwordhandler}
         /></Grid>
-                <Grid container justify="center" alignItems="center" spacing={2}>
+        <Grid container justify="center" alignItems="center" spacing={2}>
                 <Grid item>
                 <Button
                 style={{marginTop:"1rem"}}
-                href="/signup"
+                
                 size="small"
                 color="primary"
                 variant="contained"
 
                 >
-                Sign Up
+                 <Link to="/signup" className="link">Sign Up</Link>
+
+                
                 </Button>           
                 </Grid>  
                 <Grid item>
@@ -136,14 +141,15 @@ console.log("error",Error);
                 }}
                 >
                 Go
-                </Button>     
+                </Button> 
+                    
                 </Grid>   
 
         
         </Grid>
         </Grid>
 
-
+        {Loading&&<CircularProgress/>}
 
       </Box>
     </>

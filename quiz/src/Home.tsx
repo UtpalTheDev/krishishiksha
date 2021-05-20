@@ -4,7 +4,7 @@ import { useReduce } from "./Reducer-context";
 import userEvent from "@testing-library/user-event";
 import {CardActionArea,Card,Grid,CardActions,Button,Typography,CardContent,CardMedia} from "@material-ui/core"
 export function Home() {
-  console.log(Date());
+  
   let { dispatch, categorydata, user } = useReduce();
   return (
     <>

@@ -6,7 +6,7 @@ import Chart from "react-google-charts";
 export function Learninggraph() {
   let { data, user } = useReduce();
   let [statdata, setstatdata] = useState<any | null>(null);
-  const initialdata = [["x", "coorect", "wrong"]];
+  const initialdata = [["x", "correct", "wrong"]];
   const { category } = useParams();
   useEffect(() => {
     (async function () {
@@ -33,6 +33,7 @@ export function Learninggraph() {
   console.log("kjkjj", statdata);
   return (
     <>
+      <h3>{category} Learning Graph</h3>
       {!statdata && "loading"}
       {statdata && (
         <Chart

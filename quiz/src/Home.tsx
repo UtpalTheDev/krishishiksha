@@ -8,11 +8,12 @@ export function Home() {
   let { dispatch, categorydata, user } = useReduce();
   return (
     <>
+     <Grid container justify="center" alignItems="center" spacing={3}>
       {Object.keys(quizdata).map((item) => {
         return (
           <>
-      <Grid container justify="center" alignItems="center" spacing={2}>
-        <Grid item sm={5}xs={12}>
+
+        <Grid item lg={3} md={3} sm={5} xs={7} >
           <Card>
             <CardActionArea>
               <CardMedia
@@ -24,7 +25,7 @@ export function Home() {
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -46,11 +47,12 @@ export function Home() {
 
           </Card>
           </Grid>
-          </Grid>
+          
           </>
           
         );
       })}
+      </Grid>
     </>
   );
 }

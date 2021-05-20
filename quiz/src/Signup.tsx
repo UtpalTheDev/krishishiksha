@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import Location  from "history";
 
-import {Button,Box,Grid,TextField} from "@material-ui/core";
+import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
 
 
 export function Signup() {
@@ -15,7 +15,7 @@ export function Signup() {
   const [Error,setError]=useState(false);
   const {state,pathname} = useLocation();
   const navigate = useNavigate();
-  
+  const [Loading,setLoading]=useState(false);
   const [name,setname]=useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -73,8 +73,10 @@ console.log("error",Error);
     }
   }
   async function userassign() {
+    setLoading(true);
     if(name!==""&&email!==""&&password!==""){
     let userdata = await verify();
+    setLoading(false)
     userdata===null?setError(true):setError(false)
     if (userdata!==null && "name" in userdata) {
       localStorage.setItem(
@@ -88,7 +90,7 @@ console.log("error",Error);
   }
   }
   return (
-    <>
+    
       <Box textAlign="center">
         <h1>Signup</h1>
 
@@ -128,13 +130,14 @@ console.log("error",Error);
                 <Grid item>
                 <Button
                 style={{marginTop:"1rem"}}
-                href="/login"
+                
                 size="small"
                 color="primary"
                 variant="contained"
 
                 >
-                Sign In
+                  <Link to="/login" className="link">Sign In</Link>
+                
                 </Button>           
                 </Grid>  
                 <Grid item>
@@ -149,13 +152,15 @@ console.log("error",Error);
                 }}
                 >
                 Go
-                </Button>     
+                </Button>
+                   
                 </Grid>   
 
         
         </Grid>
         </Grid>
+        {Loading&&<CircularProgress/>}
       </Box>
-    </>
+    
   );
 }

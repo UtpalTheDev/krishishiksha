@@ -18,11 +18,11 @@ export default function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/learningcurve/:category" element={<Learninggraph />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/user" element={<User />} />
-        <Route path="/:quiztype" element={<Question />} />
+        <Route path="/" element={<Home />} />
+        <Privateroute path="/learningcurve/:category" element={<Learninggraph />} />
+        <Route path="/login" element={<Login />} />
+        <Privateroute path="/user" element={<User />} />
+        <Privateroute path="/:quiztype" element={<Question />} />
       </Routes>
     </div>
   );

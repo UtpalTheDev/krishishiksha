@@ -11,6 +11,7 @@ import { Privateroute } from "./Privateroute";
 import { Learninggraph } from "./Learninggraph";
 import { Navbar } from "./Navbar";
 import { User } from "./User";
+import {Signup} from "./Signup";
 export default function App() {
   console.log("render");
   console.log(useReduce());
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Privateroute path="/learningcurve/:category" element={<Learninggraph />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Privateroute path="/user" element={<User />} />
         <Privateroute path="/:quiztype" element={<Question />} />
       </Routes>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Chart from "react-google-charts";
 export function Learninggraph() {
-  let { data, user } = useReduce();
+  let { data, user,currentquiz } = useReduce();
   let [statdata, setstatdata] = useState<any | null>(null);
   const initialdata = [["x", "correct", "wrong"]];
   const { category } = useParams();
@@ -16,7 +16,7 @@ export function Learninggraph() {
           "https://quiz-backend-demo-1.utpalpati.repl.co/data/stat",
           {
             userid: user._id,
-            category: category
+            category: currentquiz
           }
         );
         if (response.status === 200) {

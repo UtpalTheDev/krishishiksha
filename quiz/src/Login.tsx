@@ -21,7 +21,7 @@ export function Login() {
   console.log("navigation",state);
   function navigationcall() {
     if (isUserLogin) {
-      navigate(state!==null ? state : "/home");
+      navigate(state!==null ? "/" : "/",{replace:true});
     }
   }
   useEffect(() => {
@@ -89,7 +89,7 @@ console.log("error",Error);
   }
   return (
     <>
-      <Box>
+      <Box textAlign="center">
         <h1>login</h1>
 
         <Grid container 
@@ -111,19 +111,35 @@ console.log("error",Error);
           value={password}
           onChange={passwordhandler}
         /></Grid>
-        <Grid item>
-        <Button
-        style={{marginTop:"1rem"}}
+                <Grid container justify="center" alignItems="center" spacing={2}>
+                <Grid item>
+                <Button
+                style={{marginTop:"1rem"}}
+                href="/signup"
+                size="small"
+                color="primary"
+                variant="contained"
+
+                >
+                Sign Up
+                </Button>           
+                </Grid>  
+                <Grid item>
+                <Button
+                style={{marginTop:"1rem"}}
+                
+                size="small"
+                color="primary"
+                variant="contained"
+                onClick={() => {
+                    userassign();
+                }}
+                >
+                Go
+                </Button>     
+                </Grid>   
+
         
-          size="small"
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            userassign();
-          }}
-        >
-          Go
-        </Button>
         </Grid>
         </Grid>
 

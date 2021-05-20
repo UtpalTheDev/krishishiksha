@@ -38,10 +38,17 @@ export function Home() {
               onClick={() => dispatch({ type: "CURRENTQUIZ", payload: item })}
             >
               Practice
-            </Link>
+        </Link>
         </Button>
-        <Button href={`/learningcurve/${item}`}size="small" color="primary">
-                        Learning Curve
+        <Button size="small" color="primary">
+        <Link
+              key={item}
+              to={`/learningcurve/${item}`}
+              style={{textDecoration:"none",color:"inherit"}}
+              onClick={() => dispatch({ type: "CURRENTQUIZ", payload: item })}
+            >
+              Learning Curve
+        </Link>
         </Button>
               </CardActions>
 

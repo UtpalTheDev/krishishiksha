@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { quizdata } from "./Data/getQuiz";
 import { useEffect } from "react";
-
+import {Answer} from "./Answer";
 import {Button,Box,Grid} from "@material-ui/core";
 
 import RotateLeft from "@material-ui/icons/RotateLeft"
@@ -95,6 +95,7 @@ export function Question() {
           reset
         </Button>
         </Grid>
+        {status==="finished" &&<Answer typedata={data[quiztype]}/>}
       </Box>
     </>
   );

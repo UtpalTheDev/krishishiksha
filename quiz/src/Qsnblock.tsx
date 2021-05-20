@@ -3,7 +3,6 @@ import { quizdata } from "./Data/getQuiz";
 import { useReduce } from "./Reducer-context";
 import { Quizdata, quiz } from "./Data/quiz.types";
 import axios from "axios";
-
 import { Button, Box, Grid } from "@material-ui/core";
 
 export function Qsnblock({ typedata }: { typedata: quiz }) {

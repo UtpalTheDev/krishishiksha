@@ -23,7 +23,7 @@ export function Signup() {
   console.log("navigation",state);
   function navigationcall() {
     if (isUserLogin) {
-      navigate(state!==null ? state : "/home");
+      navigate(state!==null ? state : "/");
     }
   }
   useEffect(() => {

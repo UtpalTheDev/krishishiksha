@@ -2,7 +2,7 @@ import { useReduce } from "./Reducer-context";
 import Chart from "react-google-charts";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import{Grid} from "@material-ui/core"
 export function User() {
   const { user } = useReduce();
   let [attendancedata, setattendancedata] = useState<any | null>(null);
@@ -42,13 +42,19 @@ export function User() {
 
   return (
     <>
-      <div>Name- {user.name}</div>
-      <div>Email- {user.email}</div>
-      <div>Activity</div>
-      {!attendancedata && "Loading"}
+    <Grid container justify="center" direction="column" style={{width:"100vw"}} spacing={3}>
+      <Grid item><div>Name- {(user.name).toLocaleUpperCase()}</div></Grid>
+      
+      <Grid item> <div>Email- {user.email}</div></Grid>
+
+      <Grid item style={{textAlign:"center"}}> <div>Activity</div></Grid>
+
+     <Grid item style={{overflowX:"auto",width:"inherit",justifyContent:"center"}}>{!attendancedata && "Loading"}
       {attendancedata && (
         <Chart
-          style={{ width: "90%", minWidth: "400px" }}
+          width={"950px"}
+          height={"200px"}
+          style={{margin:"0 auto"}}
           chartType="Calendar"
           loader={<div>Loading Chart</div>}
           data={attendancedata}
@@ -57,7 +63,9 @@ export function User() {
           }}
           rootProps={{ "data-testid": "2" }}
         />
-      )}
+      )}</Grid>
+ 
+      </Grid>
     </>
   );
 }

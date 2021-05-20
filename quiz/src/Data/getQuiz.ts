@@ -1,7 +1,7 @@
 import { quiz, Quizdata } from "./quiz.types";
 
 export const quizdata: Quizdata = {
-  Marvel: {
+  "Marvel": {
     quizName: "Marvel Cinematic Universe",
     questions: [
       {
@@ -36,7 +36,7 @@ export const quizdata: Quizdata = {
       }
     ]
   },
-  Dc: {
+  "Dc": {
     quizName: "Marvel Cinematic Universe",
     questions: [
       {
@@ -61,6 +61,59 @@ export const quizdata: Quizdata = {
           }
         ]
       }
+    ]
+  },
+  "Agricultural And Rural Land Use" : {
+    quizName: "Agricultural And Rural Land Use",
+    questions: [
+      {
+        question: " How have globalization and improved transportation links changed the geography of production areas for products such as apples, grapes, and fresh cut flowers? ",
+        points: 5,
+        options: [
+          {
+            text: " North American farmers no longer have a competitive advantage all year",
+            isRight: false
+          },
+          {
+            text: " Farmers will seek out areas with the lowest production costs ",
+            isRight: false
+          },
+          {
+            text: "Production areas have become more competitive in Least Developed Countries (LDCs) ",
+            isRight: false
+          },
+          {
+            text: "Southern hemisphere producers have increased production of these items ",
+            isRight: false
+          },
+          {
+            text: "All of the above",
+            isRight: true
+          }
+        ]
+      },
+      {
+        question: " All of the following are aspects of commercial agriculture except?",
+        points: 5,
+        options: [
+          {
+            text: " There is little relationship to other businesses. ",
+            isRight: false
+          },
+          {
+            text: " The average size of farms is hundreds of acres. ",
+            isRight: true
+          },
+          {
+            text: " A small percentage of the workforce is engaged directly in agriculture. ",
+            isRight: false
+          },
+          {
+            text: " The product is consumed off the farm. ",
+            isRight: false
+          }
+        ]
+      },
     ]
   }
 };

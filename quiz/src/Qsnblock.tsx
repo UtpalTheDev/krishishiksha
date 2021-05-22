@@ -3,12 +3,13 @@ import { quizdata } from "./Data/getQuiz";
 import { useReduce } from "./Reducer-context";
 import { Quizdata, quiz } from "./Data/quiz.types";
 import axios from "axios";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
 import { Button, Box, Grid } from "@material-ui/core";
 
 export function Qsnblock({ typedata }: { typedata: quiz }) {
   let { score, status, currentQsnNo, dispatch, user } = useReduce();
   const [time, settime] = useState(15);
-
+  const totaltime=15
   useEffect(() => {
     let timer = setInterval(() => {
       settime((prev) => prev - 1);
@@ -30,6 +31,7 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
       <Box textAlign="center">
         <h2>{question}</h2>
         {time}
+        <CircularProgressWithLabel value={(time/totaltime)*100} total={totaltime} />
         <h6>Number of point- {points}</h6>
         <Grid container spacing={3} justify="center">
           {options.map((item, index) => {

@@ -5,8 +5,8 @@ import Box from '@material-ui/core/Box';
 
 export default function CircularProgressWithLabel(props: CircularProgressProps & { value: number,total:number }) {
   return (
-    <Box position="relative" display="inline-flex">
-      <CircularProgress variant="determinate" {...props} />
+    <Box position="relative" display="inline-flex" >
+      <CircularProgress  style={{width:"70px",height:"70px",color:"green"}}variant="determinate" {...props} />
       <Box
         top={0}
         left={0}
@@ -18,9 +18,9 @@ export default function CircularProgressWithLabel(props: CircularProgressProps &
         justifyContent="center"
       >
         <Typography variant="caption" component="div" color="textSecondary">{`${
-            (props.value)*100
+          Math.round((props.value)*props.total/100)
           
-        }sec`}</Typography>
+        } sec`}</Typography>
       </Box>
     </Box>
   );

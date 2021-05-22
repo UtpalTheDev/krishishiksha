@@ -13,19 +13,18 @@ export function Home() {
         return (
           <>
 
-        <Grid item lg={3} md={3} sm={5} xs={7} >
-          <Card>
-            <CardActionArea>
+        <Grid item lg={3} md={3} sm={5} xs={7} style={{height:"100%"}}>
+          <Card style={{height:"inherit"}}>
+            <CardActionArea style={{}}>
               <CardMedia
               style={{height:"140px"}}
               image="https://images.unsplash.com/photo-1621375096401-0eb246cca66e?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
-              <CardContent>
+              <CardContent style={{}}>
               <Typography gutterBottom variant="h5" component="h2">
             {item}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            
+ 
           </Typography>
         </CardContent>
       </CardActionArea>

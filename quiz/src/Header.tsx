@@ -29,7 +29,7 @@ export function Header() {
         </>
       )}
     </Grid>
-    <h1>Quiz</h1>
+    <h2>{data[currentquiz].quizName}</h2>
     </Box>
   );
 }

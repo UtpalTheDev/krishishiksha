@@ -30,7 +30,7 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
     <>
       <Box textAlign="center">
         <h2>{question}</h2>
-        {time}
+        
         <CircularProgressWithLabel value={(time/totaltime)*100} total={totaltime} />
         <h6>Number of point- {points}</h6>
         <Grid container spacing={3} justify="center">

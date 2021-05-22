@@ -3,9 +3,18 @@ import Chart from "react-google-charts";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import{Grid} from "@material-ui/core"
+
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 export function User() {
   const { user } = useReduce();
-  let [attendancedata, setattendancedata] = useState<any | null>(null);
+  const [attendancedata, setattendancedata] = useState<any | null>(null);
+
+  const [monthlyperf,setmonthlyperf]=useState<number>(0);
+  const [yearlyperf,setyearlyperf]=useState<number>(0);
+  const [dailyperf,setdailyperf]=useState<number>(0);
+
   let item = "2021-05-21";
   let dt = [new Date(item), 10];
   let initialdata = [
@@ -31,9 +40,52 @@ export function User() {
             item[0] = new Date(item[0]);
             return item;
           });
-
           setattendancedata([...initialdata, ...response.data]);
         }
+
+        let monthlydata = await axios.post(
+          "https://quiz-backend-demo-1.utpalpati.repl.co/data/monthlyperformance",
+          {
+            userid: user._id
+          }
+        );
+        if(monthlydata.status===200){
+          if(monthlydata.data>0){
+            setmonthlyperf(Math.round(monthlydata.data))
+          }
+          else{
+            setmonthlyperf(0)
+          }
+        }
+        let yearlydata = await axios.post(
+          "https://quiz-backend-demo-1.utpalpati.repl.co/data/monthlyperformance",
+          {
+            userid: user._id
+          }
+        );
+        if(monthlydata.status===200){
+          if(monthlydata.data>0){
+            setmonthlyperf(Math.round(monthlydata.data))
+          }
+          else{
+            setyearlyperf(0)
+          }
+        }
+        let dailydata = await axios.post(
+          "https://quiz-backend-demo-1.utpalpati.repl.co/data/monthlyperformance",
+          {
+            userid: user._id
+          }
+        );
+        if(monthlydata.status===200){
+          if(monthlydata.data>0){
+            setmonthlyperf(Math.round(monthlydata.data))
+          }
+          else{
+            setdailyperf(0)
+          }
+        }
+
       } catch (error) {
         console.log("attendancerror", error);
       }
@@ -64,7 +116,13 @@ export function User() {
           rootProps={{ "data-testid": "2" }}
         />
       )}</Grid>
- 
+     <Grid container style={{margin:"4rem 0",padding:"0 2rem"}} spacing={3} justify="center">
+     <Grid item lg={4} md={4} sm={2} justify="center"> 
+     <CircularProgressbar value={monthlyperf} text={`${monthlyperf}%`} /></Grid>
+     <Grid item lg={4} md={4} sm={2}> <CircularProgressbar value={yearlyperf} text={`${yearlyperf}%`} /></Grid>    
+     <Grid item lg={4} md={4} sm={2}> <CircularProgressbar value={dailyperf} text={`${dailyperf}%`} /></Grid> 
+     </Grid>
+
       </Grid>
     </>
   );

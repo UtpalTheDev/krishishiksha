@@ -1,6 +1,7 @@
 .App {
   padding-top:5rem;
   height:100vh;
+  text-transform: none;
 }
 
 .App-logo {

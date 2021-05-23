@@ -31,7 +31,7 @@ export function Question() {
     console.log("1st effect");
     dispatch({ type: "CURRENTQUIZ", payload: quiztype });
     dispatch({ type: "RESET" });
-  }, [dispatch]);
+  }, []);
 
   function totalscore() {
     return data[currentquiz].questions.reduce(
@@ -66,7 +66,7 @@ export function Question() {
         }
       }
     })();
-  }, [status,correct, currentQsnNo, quiztype, score, totalscore, user._id, wrong]);
+  }, [status]);
   return (
     <>
       <Box>

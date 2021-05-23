@@ -92,7 +92,7 @@ console.log("monthly",monthlyperf);
         console.log("attendancerror", error);
       }
     })();
-  }, [user,initialdata]);
+  }, [user]);
 
   return (
     <>

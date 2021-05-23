@@ -62,7 +62,7 @@ export function Loginprovider({ children }: { children: any }) {
         console.log("locastorage error", error);
       }
     })();
-  }, [dispatch,verify]);
+  }, []);
 
   return (
     <>

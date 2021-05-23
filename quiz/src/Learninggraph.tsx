@@ -30,7 +30,7 @@ export function Learninggraph() {
         console.log("grapherror", error);
       }
     })();
-  }, [user,currentquiz,initialdata]);
+  }, [user]);
   
   return (
     <>

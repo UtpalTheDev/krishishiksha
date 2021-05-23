@@ -5,20 +5,20 @@ import userEvent from "@testing-library/user-event";
 import {CardActionArea,Card,Grid,CardActions,Button,Typography,CardContent,CardMedia} from "@material-ui/core"
 export function Home() {
   
-  let { dispatch, categorydata, user } = useReduce();
+  let { dispatch, categorydata, user,data } = useReduce();
   return (
     <>
-     <Grid container justify="center" alignItems="center" spacing={3}>
-      {Object.keys(quizdata).map((item) => {
+     <Grid container justify="center"  spacing={3}>
+      {Object.keys(data).map((item) => {
         return (
           <>
 
-        <Grid item lg={3} md={3} sm={5} xs={7} style={{height:"100%"}}>
-          <Card style={{height:"inherit"}}>
+        <Grid item lg={3} md={3} sm={4} xs={5} style={{}}>
+          <Card style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"100%"}}>
             <CardActionArea style={{}}>
               <CardMedia
               style={{height:"140px"}}
-              image="https://images.unsplash.com/photo-1621375096401-0eb246cca66e?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
+              image={data[item].image}/>
               <CardContent style={{}}>
               <Typography gutterBottom variant="h5" component="h2">
             {item}

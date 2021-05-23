@@ -13,23 +13,23 @@ export function Header() {
 
   return (
     <Box textAlign="center">
-      <h2>welcome-{user.name}</h2>
+      <h3>welcome-{user.name}</h3>
     <Grid container justify="space-between" alignItems="center">
       
       
-      <h2>
-        score-{score}/{totalscore()}
-      </h2>
+      <div>
+        score- ({score}/{totalscore()})
+      </div>
       {status !== "finished" && (
         <>
-          <h2>
+          <div>
             {" "}
             No of Qsn Left -{data[currentquiz].questions.length - currentQsnNo}
-          </h2>
+          </div>
         </>
       )}
     </Grid>
-    <h2>{data[currentquiz].quizName}</h2>
+    <h3>{data[currentquiz].quizName}</h3>
     </Box>
   );
 }

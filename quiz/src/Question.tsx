@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import {Answer} from "./Answer";
 import {Button,Box,Grid} from "@material-ui/core";
 
-import RotateLeft from "@material-ui/icons/RotateLeft"
 export function Question() {
   let { quiztype } = useParams();
 
@@ -73,7 +72,7 @@ export function Question() {
       <Box>
         <Header />
         {status !== "finished" && <h4>Qsn No- {currentQsnNo}</h4>}
-        {status}
+        
         <br />
 
         {status !== "finished" ? (
@@ -81,21 +80,7 @@ export function Question() {
         ) : (
           <Statistics />
         )}
-        <br />
-        <Grid container spacing={2} style={{width:"100%"}}justify="center">
-          <Grid item><Button
-          variant="contained"
-         
-          startIcon={<RotateLeft/>}
-          color="secondary"
-          onClick={() => {
-            dispatch({ type: "RESET" });
-          }}
-        >
-          reset
-        </Button></Grid>
-        
-        </Grid>
+       
         {status==="finished" &&<Answer typedata={data[quiztype]}/>}
       </Box>
     </>

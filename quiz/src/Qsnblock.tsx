@@ -3,6 +3,7 @@ import { quizdata } from "./Data/getQuiz";
 import { useReduce } from "./Reducer-context";
 import { Quizdata, quiz } from "./Data/quiz.types";
 import axios from "axios";
+import RotateLeft from "@material-ui/icons/RotateLeft"
 import CircularProgressWithLabel from "./CircularProgressWithLabel";
 import { Button, Box, Grid } from "@material-ui/core";
 
@@ -29,8 +30,8 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
   return (
     <>
       <Box textAlign="center" style={{width:"100%"}}>
-        <h2>{question}</h2>
-        
+        <div>{question}</div>
+        <br/>
         <CircularProgressWithLabel value={(time/totaltime)*100} total={totaltime} />
         <h6>Number of point- {points}</h6>
         <Grid container spacing={3} justify="center" style={{width:"100%"}}>
@@ -64,6 +65,22 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
               
             );
           })}
+        </Grid>
+        <br />
+        <Grid container spacing={2} style={{width:"100%"}}justify="center">
+          <Grid item><Button
+          variant="contained"
+         
+          startIcon={<RotateLeft/>}
+          color="secondary"
+          onClick={() => {
+            dispatch({ type: "RESET" });
+            settime(15)
+          }}
+        >
+          reset
+        </Button></Grid>
+        
         </Grid>
       </Box>
     </>

@@ -14,7 +14,7 @@ export function User() {
   const [monthlyperf,setmonthlyperf]=useState<number>(0);
   const [yearlyperf,setyearlyperf]=useState<number>(0);
   const [dailyperf,setdailyperf]=useState<number>(0);
-
+ 
   let item = "2021-05-21";
   let dt = [new Date(item), 10];
   let initialdata = [
@@ -23,6 +23,9 @@ export function User() {
       { type: "number", id: "Won/Loss" }
     ]
   ];
+console.log("yearly",yearlyperf);
+console.log("daily",dailyperf);
+console.log("monthly",monthlyperf);
 
   useEffect(() => {
     (async function () {
@@ -58,28 +61,28 @@ export function User() {
           }
         }
         let yearlydata = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/monthlyperformance",
+          "https://quiz-backend-demo-1.utpalpati.repl.co/data/yearlyperformance",
           {
             userid: user._id
           }
         );
-        if(monthlydata.status===200){
-          if(monthlydata.data>0){
-            setmonthlyperf(Math.round(monthlydata.data))
+        if(yearlydata.status===200){
+          if(yearlydata.data>0){
+            setyearlyperf(Math.round(yearlydata.data))
           }
           else{
             setyearlyperf(0)
           }
         }
         let dailydata = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/monthlyperformance",
+          "https://quiz-backend-demo-1.utpalpati.repl.co/data/dailyperformance",
           {
             userid: user._id
           }
         );
-        if(monthlydata.status===200){
-          if(monthlydata.data>0){
-            setmonthlyperf(Math.round(monthlydata.data))
+        if(dailydata.status===200){
+          if(dailydata.data>0){
+            setdailyperf(Math.round(dailydata.data))
           }
           else{
             setdailyperf(0)
@@ -116,14 +119,33 @@ export function User() {
           rootProps={{ "data-testid": "2" }}
         />
       )}</Grid>
-     <Grid container style={{margin:"4rem 0",padding:"0 2rem"}} spacing={3} justify="center">
-     <Grid item lg={4} md={4} sm={2} justify="center"> 
-     <CircularProgressbar value={monthlyperf} text={`${monthlyperf}%`} /></Grid>
-     <Grid item lg={4} md={4} sm={2}> <CircularProgressbar value={yearlyperf} text={`${yearlyperf}%`} /></Grid>    
-     <Grid item lg={4} md={4} sm={2}> <CircularProgressbar value={dailyperf} text={`${dailyperf}%`} /></Grid> 
+     
+      </Grid>
+      <Grid container style={{margin:"4rem 0",padding:"0 2rem"}} spacing={5} justify="center">
+     <Grid item lg={3} md={4} sm={5} justify="center">
+     <div style={{width:"100%"}}>
+        <CircularProgressbar value={monthlyperf} text={`${monthlyperf}%`} />
+      </div> 
+        <div style={{textAlign:"center"}}>Monthly Performance</div>
+  
+     </Grid>
+     <Grid item lg={3} md={4} sm={5}>
+     <div style={{width:"100%"}}> 
+        <CircularProgressbar value={yearlyperf} text={`${yearlyperf}%`} />
+      </div> 
+      <div style={{textAlign:"center"}}>Yearly Performance</div>
+ 
+      </Grid>    
+     <Grid item lg={3} md={4} sm={5}>
+       <div style={{width:"100%"}}> 
+         <CircularProgressbar value={dailyperf} text={`${dailyperf}%`} />
+       </div>
+       <div style={{textAlign:"center"}}>Daily Performance</div>
+       
+      </Grid> 
+
      </Grid>
 
-      </Grid>
     </>
   );
 }

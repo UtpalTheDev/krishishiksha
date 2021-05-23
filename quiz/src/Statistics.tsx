@@ -1,7 +1,7 @@
 import { useReduce } from "./Reducer-context";
 import {Box} from "@material-ui/core"
 export function Statistics() {
-  let { correct, wrong, data } = useReduce();
+  let { correct, wrong} = useReduce();
   return (
     <><Box textAlign="center">
       <p> Attempted- {correct + wrong}</p>

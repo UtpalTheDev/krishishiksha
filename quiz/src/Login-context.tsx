@@ -8,7 +8,7 @@ type Logincontextstate = {
 const Logincontext = createContext({} as Logincontextstate);
 
 export function Loginprovider({ children }: { children: any }) {
-  let { dispatch,user } = useReduce();
+  let { dispatch } = useReduce();
   const [isUserLogin, setLogin] = useState(false);
 
   type Servererror = {
@@ -62,7 +62,7 @@ export function Loginprovider({ children }: { children: any }) {
         console.log("locastorage error", error);
       }
     })();
-  }, []);
+  }, [dispatch,verify]);
 
   return (
     <>

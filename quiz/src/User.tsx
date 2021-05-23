@@ -16,7 +16,6 @@ export function User() {
   const [dailyperf,setdailyperf]=useState<number>(0);
  
   let item = "2021-05-21";
-  let dt = [new Date(item), 10];
   let initialdata = [
     [
       { type: "date", id: "Date" },
@@ -93,7 +92,7 @@ console.log("monthly",monthlyperf);
         console.log("attendancerror", error);
       }
     })();
-  }, [user]);
+  }, [user,initialdata]);
 
   return (
     <>

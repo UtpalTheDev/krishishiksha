@@ -9,10 +9,10 @@ import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
 
 
 export function Login() {
-  let { dispatch, user } = useReduce();
+  let { dispatch} = useReduce();
   let { isUserLogin, setLogin } = useLogin();
   const [Error,setError]=useState(false);
-  let {state,pathname} = useLocation();
+  let {state} = useLocation();
   let navigate = useNavigate();
   const [Loading,setLoading]= useState(false);
   let [email, setemail] = useState("");

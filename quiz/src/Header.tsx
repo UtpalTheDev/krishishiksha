@@ -1,5 +1,5 @@
 import { useReduce } from "./Reducer-context";
-import {Button,Box,Grid} from "@material-ui/core";
+import {Box,Grid} from "@material-ui/core";
 
 export function Header() {
   let { user, score, status, currentQsnNo, currentquiz, data } = useReduce();

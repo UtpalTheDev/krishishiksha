@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Chart from "react-google-charts";
 import {Box} from "@material-ui/core";
 export function Learninggraph() {
-  let { data, user,currentquiz } = useReduce();
+  let {  user,currentquiz } = useReduce();
   let [statdata, setstatdata] = useState<any | null>(null);
   const initialdata = [["x", "correct", "wrong"]];
   const { category } = useParams();
@@ -30,7 +30,7 @@ export function Learninggraph() {
         console.log("grapherror", error);
       }
     })();
-  }, [user]);
+  }, [user,currentquiz,initialdata]);
   
   return (
     <>

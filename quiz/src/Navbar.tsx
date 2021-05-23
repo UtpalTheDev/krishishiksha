@@ -18,11 +18,11 @@ console.log("here me",user);
     <>
       <div>
         
-        <AppBar>
+        <AppBar style={{color:"black",background:"white"}}>
           <Toolbar>
             <Grid container justify="space-between" alignItems="center">
             <Link to="/" style={{textDecoration:"none", color:"inherit"}}>
-            <h3>Quiz</h3>
+            <h3>KrishiShiksha</h3>
             </Link>
 
             <Grid item>

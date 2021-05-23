@@ -20,7 +20,7 @@ export function Learninggraph() {
             category: currentquiz
           }
         );
-        if (response.status === 200) {
+        if (response.status === 200&&response?.data[0]) {
           setstatdata([...initialdata, ...response.data]);
         }
         return () => {

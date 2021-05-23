@@ -1,10 +1,10 @@
 import {useReduce} from "./Reducer-context";
 import {Grid,Button,Box} from "@material-ui/core";
-import { Quizdata, quiz } from "./Data/quiz.types";
+import {  quiz } from "./Data/quiz.types";
 
 export function Answer({ typedata }: { typedata: quiz }){
-    let { score, status, currentQsnNo, dispatch, user,currentquiz } = useReduce();
-    let { question, options, points } = typedata.questions[currentQsnNo - 1];
+    let {  currentQsnNo} = useReduce();
+
 
     return(
         <Box textAlign="center">

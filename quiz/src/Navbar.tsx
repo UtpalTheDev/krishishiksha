@@ -1,7 +1,7 @@
 import { useReduce } from "./Reducer-context";
 import { useLogin } from "./Login-context";
 import { Link } from "react-router-dom";
-import{AppBar,Toolbar,IconButton,Avatar,Grid,Button} from "@material-ui/core";
+import{AppBar,Toolbar,IconButton,Grid,Button} from "@material-ui/core";
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 export function Navbar() {
   const {user,dispatch} =useReduce();

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from "react";
 
 import { quizdata } from "./Data/getQuiz";
 import { Quizdata } from "./Data/quiz.types";
-import { useState } from "react";
+
 type statustype = "starting" | "finished" | "Running";
 type UserState = {
   _id: string;

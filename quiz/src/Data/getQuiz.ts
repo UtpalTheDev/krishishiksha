@@ -1,4 +1,4 @@
-import { quiz, Quizdata } from "./quiz.types";
+import {  Quizdata } from "./quiz.types";
 
 export const quizdata: Quizdata = {
 

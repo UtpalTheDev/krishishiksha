@@ -1,5 +1,4 @@
 import { useReduce } from "./Reducer-context";
-import { quiz } from "./Data/quiz.types";
 import {Button,Box,Grid} from "@material-ui/core";
 
 export function Header() {

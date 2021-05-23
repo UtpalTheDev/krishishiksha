@@ -4,16 +4,16 @@ import { useLogin } from "./Login-context";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
-import Location  from "history";
+
 
 import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
 
 
 export function Signup() {
-  const { dispatch, user } = useReduce();
+  const { dispatch } = useReduce();
   const { isUserLogin, setLogin } = useLogin();
   const [Error,setError]=useState(false);
-  const {state,pathname} = useLocation();
+  const {state} = useLocation();
   const navigate = useNavigate();
   const [Loading,setLoading]=useState(false);
   const [name,setname]=useState("");

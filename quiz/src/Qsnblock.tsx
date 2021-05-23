@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { quizdata } from "./Data/getQuiz";
+
 import { useReduce } from "./Reducer-context";
-import { Quizdata, quiz } from "./Data/quiz.types";
-import axios from "axios";
+import { quiz } from "./Data/quiz.types";
+
 import RotateLeft from "@material-ui/icons/RotateLeft"
 import CircularProgressWithLabel from "./CircularProgressWithLabel";
 import { Button, Box, Grid } from "@material-ui/core";
 
 export function Qsnblock({ typedata }: { typedata: quiz }) {
-  let { score, status, currentQsnNo, dispatch, user } = useReduce();
+  let { currentQsnNo, dispatch} = useReduce();
   const [time, settime] = useState(15);
   const totaltime=15
   useEffect(() => {

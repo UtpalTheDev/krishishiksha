@@ -7,7 +7,7 @@ import axios from "axios";
 import { quizdata } from "./Data/getQuiz";
 import { useEffect } from "react";
 import {Answer} from "./Answer";
-import {Button,Box,Grid} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 
 export function Question() {
   let { quiztype } = useParams();

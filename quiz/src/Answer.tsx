@@ -14,24 +14,27 @@ export function Answer({ typedata }: { typedata: quiz }){
 
             return(
                 <>
+                <hr/>
+                <Box style={{padding:"1rem,0"}}>
                  <h2>{current.question}</h2>
-        <Grid container spacing={3} justify="center">
-          {current.options.map((item, index) => {
-            return (
+                 <Grid container spacing={3} justify="center">
+                   {current.options.map((item, index) => {
+                    return (
               
-                <Grid item xs={12} sm={6}>
-                  <Button
-                    
-                    style={{width:"100%",background:item.isRight?"green":"#f2f2f2"}}
-                    
-                  >
-                    {` ${item.text}`}
-                  </Button>
-                </Grid>
+                            <Grid item xs={10} sm={5} md={4} lg={3}>
+                              <Button
+                                
+                                style={{width:"100%",background:item.isRight?"lightgreen":"#f2f2f2",height:"100%"}}
+                                
+                              >
+                                {` ${item.text}`}
+                              </Button>
+                            </Grid>
               
-            );
-          })}
-        </Grid>
+                          );
+                   })}
+                 </Grid>
+               </Box>
                 </>
             )
         }) 

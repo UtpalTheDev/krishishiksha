@@ -28,19 +28,19 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
 
   return (
     <>
-      <Box textAlign="center">
+      <Box textAlign="center" style={{width:"100%"}}>
         <h2>{question}</h2>
         
         <CircularProgressWithLabel value={(time/totaltime)*100} total={totaltime} />
         <h6>Number of point- {points}</h6>
-        <Grid container spacing={3} justify="center">
+        <Grid container spacing={3} justify="center" style={{width:"100%"}}>
           {options.map((item, index) => {
             return (
               
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={10} sm={5} md={4} lg={3}>
                   <Button
                     variant="outlined"
-                    style={{width:"100%"}}
+                    style={{width:"100%",height:"100%"}}
                     color="primary"
                     onClick={() => {
                       if (item.isRight === false) {

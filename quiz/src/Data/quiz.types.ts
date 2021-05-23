@@ -1,5 +1,6 @@
 export type quiz = {
   quizName: string;
+  image:string,
   questions: question[];
 };
 export type question = {

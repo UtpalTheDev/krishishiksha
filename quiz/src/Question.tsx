@@ -82,8 +82,8 @@ export function Question() {
           <Statistics />
         )}
         <br />
-        <Grid container spacing={2} justify="center">
-        <Button
+        <Grid container spacing={2} style={{width:"100%"}}justify="center">
+          <Grid item><Button
           variant="contained"
          
           startIcon={<RotateLeft/>}
@@ -93,7 +93,8 @@ export function Question() {
           }}
         >
           reset
-        </Button>
+        </Button></Grid>
+        
         </Grid>
         {status==="finished" &&<Answer typedata={data[quiztype]}/>}
       </Box>

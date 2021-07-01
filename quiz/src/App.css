@@ -1,12 +1,15 @@
 .App {
   padding-top:5rem;
-  height:100vh;
+  min-height:100vh;
   text-transform: none;
+  max-width:100vw;
+  overflow:hidden;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {

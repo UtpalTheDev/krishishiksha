@@ -38,9 +38,6 @@ console.log("error",Error);
     setpassword(event.target.value);
   }
 
-    
-    
-  
 
   type User = {
     _id: string;
@@ -102,7 +99,8 @@ console.log("error",Error);
         <TextField 
         id="standard-basic" 
         error={Error}
-        value={email}  
+        value={email}
+        type="email"  
         label="Email Id"
          onChange={emailhandler}/>
          </Grid>  
@@ -112,6 +110,7 @@ console.log("error",Error);
         error={Error}
           label="Password"
           value={password}
+          type="password"
           onChange={passwordhandler}
         /></Grid>
         <Grid container justify="center" alignItems="center" spacing={2}>

@@ -16,14 +16,14 @@ export function Header() {
     <Grid container justify="space-between" alignItems="center">
       
       
-      <div>
-        score- ({score}/{totalscore()})
+      <div style={{paddingLeft:"0.3rem"}}> 
+        Score- ({score}/{totalscore()})
       </div>
       {status !== "finished" && (
         <>
-          <div>
+          <div style={{paddingRight:"0.3rem"}}>
             {" "}
-            No of Qsn Left -{data[currentquiz].questions.length - currentQsnNo}
+            No of Qsn Left- {data[currentquiz].questions.length - currentQsnNo}
           </div>
         </>
       )}

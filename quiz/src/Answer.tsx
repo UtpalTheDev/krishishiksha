@@ -9,21 +9,21 @@ export function Answer({ typedata }: { typedata: quiz }){
         <Box textAlign="center">
             <h3>Answers</h3>
         {   
-        typedata.questions.map(current=>{
+        typedata.questions.map((current,index)=>{
 
             return(
                 <>
                 <hr/>
-                <Box style={{padding:"1rem,0"}}>
-                 <h2>{current.question}</h2>
-                 <Grid container spacing={3} justify="center">
+                <Box style={{padding:"1rem,0",letterSpacing:"0.5px"}}>
+            <div style={{padding:"0.8rem"}}><b>{index+1}.</b> {current.question}</div>
+                 <Grid container  justify="center">
                    {current.options.map((item, index) => {
                     return (
               
-                            <Grid item xs={10} sm={5} md={4} lg={3}>
+                            <Grid item xs={10} sm={5} md={4} lg={3} style={{margin:"0.5rem 0.5rem"}}>
                               <Button
                                 
-                                style={{width:"100%",background:item.isRight?"lightgreen":"#f2f2f2",height:"100%"}}
+                                style={{width:"100%",background:item.isRight?"lightgreen":"#f2f2f2",height:"100%",fontSize:"12px"}}
                                 
                               >
                                 {` ${item.text}`}

@@ -120,26 +120,30 @@ console.log("monthly",monthlyperf);
       )}</Grid>
      
       </Grid>
-      <Grid container style={{margin:"4rem 0",padding:"0 2rem"}} spacing={5} justify="center">
-     <Grid item lg={3} md={4} sm={5} justify="center">
-     <div style={{width:"100%"}}>
+      <Grid container style={{margin:"4rem 0",padding:"0 2rem"}} spacing={0} justify="center">
+
+     <Grid item lg={3} md={4} sm={5} justify="center" style={{margin:"0.5rem 0.7rem",display: "flex",
+      alignItems: "center",flexDirection: "column"}}>
+     <div style={{width:"70%"}}>
         <CircularProgressbar value={monthlyperf} text={`${monthlyperf}%`} />
       </div> 
-        <div style={{textAlign:"center"}}>Monthly Performance</div>
+        <div style={{textAlign:"center", paddingTop:"0.5rem"}}>Monthly Performance</div>
   
      </Grid>
-     <Grid item lg={3} md={4} sm={5}>
-     <div style={{width:"100%"}}> 
+     <Grid item lg={3} md={4} sm={5} justify="center" style={{margin:"0.5rem 0.7rem",display: "flex",
+     alignItems: "center",flexDirection: "column"}}>
+     <div style={{width:"70%"}}> 
         <CircularProgressbar value={yearlyperf} text={`${yearlyperf}%`} />
       </div> 
-      <div style={{textAlign:"center"}}>Yearly Performance</div>
+      <div style={{textAlign:"center", paddingTop:"0.5rem"}}>Yearly Performance</div>
  
       </Grid>    
-     <Grid item lg={3} md={4} sm={5}>
-       <div style={{width:"100%"}}> 
+     <Grid item lg={3} md={4} sm={5} justify="center" style={{margin:"0.5rem 0.7rem",display: "flex",
+     alignItems: "center",flexDirection: "column"}}>
+       <div style={{width:"70%"}}> 
          <CircularProgressbar value={dailyperf} text={`${dailyperf}%`} />
        </div>
-       <div style={{textAlign:"center"}}>Daily Performance</div>
+       <div style={{textAlign:"center", paddingTop:"0.5rem"}}>Daily Performance</div>
        
       </Grid> 
 

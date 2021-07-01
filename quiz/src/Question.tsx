@@ -71,7 +71,7 @@ export function Question() {
     <>
       <Box>
         <Header />
-        {status !== "finished" && <h4>Qsn No- {currentQsnNo}</h4>}
+        {status !== "finished" && <h4 style={{padding:" 0.3rem 0.3rem",background:"lightblue"}}>Qsn No- {currentQsnNo}</h4>}
         
         <br />
 

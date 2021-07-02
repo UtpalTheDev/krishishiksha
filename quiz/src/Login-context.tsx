@@ -1,13 +1,14 @@
-import React, { useContext, useState, createContext, useEffect } from "react";
+import React, { useContext, useState, createContext, useEffect,FunctionComponent } from "react";
 import { useReduce } from "./Reducer-context";
 import axios, { AxiosError } from "axios";
+import { JsxElement } from "typescript";
 type Logincontextstate = {
   isUserLogin: boolean;
   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const Logincontext = createContext({} as Logincontextstate);
 
-export function Loginprovider({ children }: { children: any }) {
+export function Loginprovider({ children }: { children: React.ReactChild }) {
   let { dispatch } = useReduce();
   const [isUserLogin, setLogin] = useState(false);
 

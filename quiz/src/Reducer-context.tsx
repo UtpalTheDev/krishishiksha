@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useReducer,useEffect} from "react";
+import React, { createContext, useContext, useReducer,useEffect,FunctionComponent} from "react";
 import axios from"axios";
 import { quizdata } from "./Data/getQuiz";
 import { Quizdata } from "./Data/quiz.types";
+import { JsxElement } from "typescript";
 
 type statustype = "starting" | "finished" | "Running";
 type UserState = {
@@ -29,7 +30,7 @@ const initialstate: quizstate = {
   currentquiz: "",
   correct: 0,
   wrong: 0,
-  data: quizdata,
+  data: {},
   categorydata: Object.keys(quizdata)
 };
 type actiontype =
@@ -151,7 +152,7 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
   }
 }
 
-export function Contextprovider({ children }: { children: any }) {
+export function Contextprovider({ children }:{children:React.ReactChild}) {
 
   useEffect(()=>{
     (async()=>{

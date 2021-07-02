@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useReducer } from "react";
-
+import React, { createContext, useContext, useReducer,useEffect} from "react";
+import axios from"axios";
 import { quizdata } from "./Data/getQuiz";
 import { Quizdata } from "./Data/quiz.types";
 
@@ -33,6 +33,7 @@ const initialstate: quizstate = {
   categorydata: Object.keys(quizdata)
 };
 type actiontype =
+  | {type:  "LOAD"; payload:{data:Quizdata} }
   | { type: "RESET" }
   | { type: "INCREMENT_SCORE"; payload: { score: number } }
   | { type: "DECREMENT_SCORE"; payload: { score: number } }
@@ -42,7 +43,6 @@ type actiontype =
   | {type: "LOGOUT"}
 type Contextstate = {
   user: UserState;
-
   score: number;
   status: statustype;
   currentQsnNo: number;
@@ -59,6 +59,9 @@ export const Reducercontext = createContext({} as Contextstate);
 function quizreducer(state: quizstate, action: actiontype): quizstate {
   console.log("reducer");
   switch (action.type) {
+    case "LOAD": 
+      return{...state, data:action.payload.data}
+    
     case "USER":
       return { ...state, user: action.payload };
     case "CURRENTQUIZ":
@@ -149,6 +152,16 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 }
 
 export function Contextprovider({ children }: { children: any }) {
+
+  useEffect(()=>{
+    (async()=>{
+      const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
+      if(response.status===200){
+        dispatch({type:"LOAD",payload:{data:response.data}})
+      }
+    })()
+    
+  },[])
   console.log("reduce context")
   let [
     {

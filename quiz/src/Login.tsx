@@ -51,7 +51,7 @@ console.log("error",Error);
   async function verify(): Promise<User | Servererror> {
     try {
       let response = await axios.post(
-        "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithcred",
+        "https://quiz-backend-demo-2.utpalpati.repl.co/user/infowithcred",
         { email: email, password: password }
       );
       console.log("verify success",response)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useReduce } from "../reducer-context/Reducer-context";
-import { quiz } from "../Data/quiz.types";
+import { quiz } from "../DataTypes/quiz.types";
 
 import RotateLeft from "@material-ui/icons/RotateLeft"
 import {CircularProgressWithLabel} from "./CircularProgressWithLabel";

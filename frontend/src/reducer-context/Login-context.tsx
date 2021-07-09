@@ -2,25 +2,27 @@ import React, { useContext, useState, createContext, useEffect,FunctionComponent
 import { useReduce } from "./Reducer-context";
 import axios, { AxiosError } from "axios";
 import { JsxElement } from "typescript";
-type Logincontextstate = {
-  isUserLogin: boolean;
-  setLogin: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import {UserState, Servererror,Logincontextstate} from "../DataTypes/quiz.types";
+
+// type Logincontextstate = {
+//   isUserLogin: boolean;
+//   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+// };
 const Logincontext = createContext({} as Logincontextstate);
 
 export function Loginprovider({ children }: { children: React.ReactChild }) {
   let { dispatch } = useReduce();
   const [isUserLogin, setLogin] = useState(false);
 
-  type Servererror = {
-    errormessage: string;
-  };
-  type User = {
-    _id: string;
-    name: string;
-    email: string;
-  };
-  async function verify(id: string): Promise<User | Servererror> {
+  // type Servererror = {
+  //   errormessage: string;
+  // };
+  // type User = {
+  //   _id: string;
+  //   name: string;
+  //   email: string;
+  // };
+  async function verify(id: string): Promise<UserState | Servererror> {
     try {
       let response = await axios.post(
         "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithtoken",

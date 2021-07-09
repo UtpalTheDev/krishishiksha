@@ -4,6 +4,7 @@ import { useLogin } from "../reducer-context/Login-context";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
+import {UserState,Servererror } from "../DataTypes/quiz.types";
 
 
 import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
@@ -42,16 +43,16 @@ console.log("error",Error);
     setname(event.target.value);
   }
 
-  type User = {
-    _id: string;
-    name: string;
-    email: string;
-  };
-  type Servererror = {
-    errormessage: string;
-  };
+  // type User = {
+  //   _id: string;
+  //   name: string;
+  //   email: string;
+  // };
+  // type Servererror = {
+  //   errormessage: string;
+  // };
 
-  async function verify(): Promise<User | Servererror> {
+  async function verify(): Promise<UserState | Servererror> {
     try {
       let response = await axios.post(
         "https://quiz-backend-demo-1.utpalpati.repl.co/user/save",

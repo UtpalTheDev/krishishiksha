@@ -4,7 +4,7 @@ import { useReduce } from "../reducer-context/Reducer-context";
 import { Statistics,Answer,Qsnblock,Header} from "../components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { quizdata } from "../Data/getQuiz";
+// import { quizdata } from "../Data/getQuiz";
 import { useEffect } from "react";
 // import {Answer} from "../components/Answer";
 import {Box} from "@material-ui/core";
@@ -12,9 +12,9 @@ import {Box} from "@material-ui/core";
 export function Question() {
   let { quiztype } = useParams();
 
-  // let {data}=useReduce();
+  //  let {data}=useReduce();
 
-  console.log("jkh", quizdata[quiztype]);
+  // console.log("jkh", quizdata[quiztype]);
   let {
     score,
     status,

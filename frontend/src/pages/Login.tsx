@@ -1,5 +1,5 @@
-import { useReduce } from "./Reducer-context";
-import { useLogin } from "./Login-context";
+import { useReduce } from "../reducer-context/Reducer-context";
+import { useLogin } from "../reducer-context/Login-context";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";

@@ -1,5 +1,5 @@
-import { useReduce } from "./Reducer-context";
-import { useLogin } from "./Login-context";
+import { useReduce } from "../reducer-context/Reducer-context";
+import { useLogin } from "../reducer-context/Login-context";
 import { Link } from "react-router-dom";
 import{AppBar,Toolbar,IconButton,Grid,Button} from "@material-ui/core";
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';

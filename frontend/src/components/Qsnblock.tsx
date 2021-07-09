@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { useReduce } from "./Reducer-context";
-import { quiz } from "./Data/quiz.types";
+import { useReduce } from "../reducer-context/Reducer-context";
+import { quiz } from "../Data/quiz.types";
 
 import RotateLeft from "@material-ui/icons/RotateLeft"
-import CircularProgressWithLabel from "./CircularProgressWithLabel";
+import {CircularProgressWithLabel} from "./CircularProgressWithLabel";
 import { Button, Box, Grid } from "@material-ui/core";
 
 export function Qsnblock({ typedata }: { typedata: quiz }) {

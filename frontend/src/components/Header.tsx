@@ -1,4 +1,4 @@
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import {Box,Grid} from "@material-ui/core";
 
 export function Header() {

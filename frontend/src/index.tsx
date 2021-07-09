@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Contextprovider } from "./Reducer-context";
-import {Loginprovider} from "./Login-context";
+import { Contextprovider } from "./reducer-context/Reducer-context";
+import {Loginprovider} from "./reducer-context/Login-context";
 
 import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(

@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 
 import {CardActionArea,Card,Grid,CardActions,Button,Typography,CardContent,CardMedia} from "@material-ui/core"
 export function Home() {

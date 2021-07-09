@@ -1,5 +1,5 @@
 import {Grid,Button,Box} from "@material-ui/core";
-import {  quiz } from "./Data/quiz.types";
+import {  quiz } from "../Data/quiz.types";
 
 export function Answer({ typedata }: { typedata: quiz }){
     

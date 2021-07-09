@@ -1,4 +1,4 @@
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import Chart from "react-google-charts";
 import  { useEffect, useState } from "react";
 import axios from "axios";

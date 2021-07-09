@@ -1,12 +1,12 @@
-import { Header } from "./Header";
-import { Qsnblock } from "./Qsnblock";
-import { useReduce } from "./Reducer-context";
-import { Statistics } from "./Statistics";
+// import { Header } from "../components/Header";
+//mport { Qsnblock } from "../components/Qsnblock";
+import { useReduce } from "../reducer-context/Reducer-context";
+import { Statistics,Answer,Qsnblock,Header} from "../components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { quizdata } from "./Data/getQuiz";
+import { quizdata } from "../Data/getQuiz";
 import { useEffect } from "react";
-import {Answer} from "./Answer";
+// import {Answer} from "../components/Answer";
 import {Box} from "@material-ui/core";
 
 export function Question() {

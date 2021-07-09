@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer,useEffect,FunctionComponent} from "react";
 import axios from"axios";
-import { quizdata } from "./Data/getQuiz";
-import { Quizdata } from "./Data/quiz.types";
+import { quizdata } from "../Data/getQuiz";
+import { Quizdata } from "../Data/quiz.types";
 import { JsxElement } from "typescript";
 
 type statustype = "starting" | "finished" | "Running";

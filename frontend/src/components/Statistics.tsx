@@ -1,4 +1,4 @@
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import {Box} from "@material-ui/core"
 export function Statistics() {
   let { correct, wrong} = useReduce();

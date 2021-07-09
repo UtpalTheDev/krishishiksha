@@ -1,10 +1,10 @@
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Chart from "react-google-charts";
 import {Box} from "@material-ui/core";
-export function Learninggraph() {
+export function LearningGraph() {
   let {  user,currentquiz } = useReduce();
   let [statdata, setstatdata] = useState<any | null>(null);
   const initialdata = [["x", "correct", "wrong"]];

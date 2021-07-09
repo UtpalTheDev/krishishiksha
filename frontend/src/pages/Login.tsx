@@ -18,7 +18,6 @@ export function Login() {
   let [email, setemail] = useState("");
   let [password, setpassword] = useState("");
 
-  console.log("navigation",state);
   function navigationcall() {
     if (isUserLogin) {
       navigate(state!==null ? "/" : "/",{replace:true});
@@ -26,11 +25,8 @@ export function Login() {
   }
   useEffect(() => {
     navigationcall();
-    console.log("lnk")
   });
 
-  // navigationcall();
-console.log("error",Error);
   function emailhandler(event: React.ChangeEvent<HTMLInputElement>) {
     setemail(event.target.value);
   }
@@ -38,23 +34,13 @@ console.log("error",Error);
     setpassword(event.target.value);
   }
 
-
-  // type User = {
-  //   _id: string;
-  //   name: string;
-  //   email: string;
-  // };
-  // type Servererror = {
-  //   errormessage: string;
-  // };
-
   async function verify(): Promise<UserState | Servererror> {
     try {
       let response = await axios.post(
         "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithcred",
         { email: email, password: password }
       );
-      console.log("verify success",response)
+      console.log("verify success")
       setError(false);
       return response.data;
     } catch (error) {
@@ -84,7 +70,6 @@ console.log("error",Error);
       dispatch({ type: "USER", payload: userdata });
       setLogin((prev) => !prev);
     }
-    console.log("login data",userdata);
   }
   }
   return (

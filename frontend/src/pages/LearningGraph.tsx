@@ -11,7 +11,6 @@ export function LearningGraph() {
   const { category } = useParams();
   useEffect(() => {
     (async function () {
-      console.log("id", user._id);
       try {
         let response = await axios.post(
           "https://quiz-backend-demo-1.utpalpati.repl.co/data/stat",

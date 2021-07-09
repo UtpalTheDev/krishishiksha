@@ -12,7 +12,6 @@ function logout(){
   dispatch({type:"LOGOUT"});
   setLogin(false);
 }
-console.log("here me",user);
 
   return (
     <>

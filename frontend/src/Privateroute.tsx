@@ -3,7 +3,6 @@ import { useLogin } from "./reducer-context/Login-context";
 
 export function Privateroute({ path, ...props }: any) {
   let { isUserLogin } = useLogin();
-console.log("login",isUserLogin)
   return isUserLogin ? (
     <Route {...props} path={path} />
   ) : (

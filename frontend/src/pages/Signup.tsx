@@ -21,7 +21,6 @@ export function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
-  console.log("navigation",state);
   function navigationcall() {
     if (isUserLogin) {
       navigate(state!==null ? state : "/");
@@ -31,8 +30,6 @@ export function Signup() {
     navigationcall();
   });
 
-  // navigationcall();
-console.log("error",Error);
   function emailhandler(event: React.ChangeEvent<HTMLInputElement>) {
     setemail(event.target.value);
   }
@@ -42,15 +39,6 @@ console.log("error",Error);
   function namehandler(event: React.ChangeEvent<HTMLInputElement>) {
     setname(event.target.value);
   }
-
-  // type User = {
-  //   _id: string;
-  //   name: string;
-  //   email: string;
-  // };
-  // type Servererror = {
-  //   errormessage: string;
-  // };
 
   async function verify(): Promise<UserState | Servererror> {
     try {
@@ -87,7 +75,6 @@ console.log("error",Error);
       dispatch({ type: "USER", payload: userdata });
       setLogin((prev) => !prev);
     }
-    console.log(userdata);
   }
   }
   return (

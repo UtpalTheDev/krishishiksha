@@ -23,7 +23,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
   async function verify(id: string): Promise<User | Servererror> {
     try {
       let response = await axios.post(
-        "https://quiz-backend-demo-2.utpalpati.repl.co/user/infowithtoken",
+        "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithtoken",
         { userid: id }
       );
       return response.data;

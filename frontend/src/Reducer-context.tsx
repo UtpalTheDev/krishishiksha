@@ -156,7 +156,7 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
 
   useEffect(()=>{
     (async()=>{
-      const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
+      const response=await axios.get("https://quiz-backend-demo-1.utpalpati.repl.co/question/");
       if(response.status===200){
         dispatch({type:"LOAD",payload:{data:response.data}})
       }

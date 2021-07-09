@@ -97,9 +97,9 @@ console.log("monthly",monthlyperf);
   return (
     <>
     <Grid container justify="center" direction="column" style={{width:"100vw"}} spacing={3}>
-      <Grid item><div>Name- {(user.name).toLocaleUpperCase()}</div></Grid>
+      <Grid item><div style={{"paddingLeft":"1rem"}}>Name- {(user.name).toLocaleUpperCase()}</div></Grid>
       
-      <Grid item> <div>Email- {user.email}</div></Grid>
+      <Grid item> <div style={{"paddingLeft":"1rem"}}>Email- {user.email}</div></Grid>
 
       <Grid item style={{textAlign:"center"}}> <div>Activity</div></Grid>
 

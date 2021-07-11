@@ -13,9 +13,8 @@ export function LearningGraph() {
     (async function () {
       try {
         let response = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/stat",
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/stat",
           {
-            userid: user._id,
             category: currentquiz
           }
         );

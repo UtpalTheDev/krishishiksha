@@ -27,11 +27,8 @@ export function User() {
   useEffect(() => {
     (async function () {
       try {
-        let response = await axios.post(
-          "https://quiz-backend-demo-2.utpalpati.repl.co/data/attendance",
-          {
-            userid: user._id
-          }
+        let response = await axios.get(
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/attendance"
         );
 
         if (response.status === 200) {
@@ -42,11 +39,8 @@ export function User() {
           setattendancedata([...initialdata, ...response.data]);
         }
 
-        let monthlydata = await axios.post(
-          "https://quiz-backend-demo-2.utpalpati.repl.co/data/monthlyperformance",
-          {
-            userid: user._id
-          }
+        let monthlydata = await axios.get(
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/monthlyperformance"
         );
         if(monthlydata.status===200){
           if(monthlydata.data>0){
@@ -56,11 +50,8 @@ export function User() {
             setmonthlyperf(0)
           }
         }
-        let yearlydata = await axios.post(
-          "https://quiz-backend-demo-2.utpalpati.repl.co/data/yearlyperformance",
-          {
-            userid: user._id
-          }
+        let yearlydata = await axios.get(
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/yearlyperformance"
         );
         if(yearlydata.status===200){
           if(yearlydata.data>0){
@@ -70,11 +61,8 @@ export function User() {
             setyearlyperf(0)
           }
         }
-        let dailydata = await axios.post(
-          "https://quiz-backend-demo-2.utpalpati.repl.co/data/dailyperformance",
-          {
-            userid: user._id
-          }
+        let dailydata = await axios.get(
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/dailyperformance"
         );
         if(dailydata.status===200){
           if(dailydata.data>0){

@@ -85,7 +85,9 @@ export function Signup() {
         <TextField
         error={Error!==null?true:false}
           required
-          label="Password"
+          id="standard-basic" 
+          label="password"
+          type="password"
           value={password}
           onChange={passwordhandler}
         /></Grid>

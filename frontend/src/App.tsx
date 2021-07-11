@@ -6,7 +6,7 @@ import "./App.css";
  import { Privateroute } from "./Privateroute";
 
 
-import {Question,Login,LearningGraph,Home,User,Signup } from "./pages"
+import {Question,Login,LearningGraph,Home,User,Signup,NotFound } from "./pages"
 import {Navbar} from "./components"
 export default function App() {
   return (
@@ -18,7 +18,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Privateroute path="/user" element={<User />} />
-        <Privateroute path="/:quiztype" element={<Question />} />
+        <Privateroute path="/quiz/:quiztype" element={<Question />} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </div>
   );

@@ -58,7 +58,7 @@ export function Login() {
         <Grid item>
         <TextField
         error={Error!==null?true:false}
-          label="Password"
+          label="password"
           value={password}
           type="password"
           onChange={passwordhandler}
@@ -67,7 +67,6 @@ export function Login() {
                 <Grid item>
                 <Button
                 style={{marginTop:"1rem"}}
-                
                 size="small"
                 color="primary"
                 variant="contained"

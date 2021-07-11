@@ -20,19 +20,18 @@ export function Home() {
               style={{height:"140px"}}
               image={data[item].image}/>
               <CardContent style={{}}>
-              <Typography gutterBottom variant="h5" component="h2">
-            {item}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
- 
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
+                <Typography gutterBottom variant="h5" component="h2">
+                 {item}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+        <CardActions>
         <Button size="small" color="primary">
         <Link
               key={item}
-              to={`/${item}`}
+              to={`quiz/${item}`}
               style={{textDecoration:"none",color:"inherit"}}
               onClick={() => dispatch({ type: "CURRENTQUIZ", payload: item })}
             >

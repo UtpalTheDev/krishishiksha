@@ -4,9 +4,9 @@ export function Statistics() {
   let { correct, wrong} = useReduce();
   return (
     <><Box textAlign="center">
-      <p> Attempted- {correct + wrong}</p>
-      <p> Correct ans- {correct}</p>
-      <p> Wrong ans- {wrong}</p>
+      <p style={{color:"blue"}}> Attempted- {correct + wrong}</p>
+      <p style={{color:"green"}}> Correct ans- {correct}</p>
+      <p style={{color:"red"}}> Wrong ans- {wrong}</p>
     </Box>
     </>
 

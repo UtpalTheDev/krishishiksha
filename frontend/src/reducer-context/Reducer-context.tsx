@@ -2,6 +2,9 @@ import React, { createContext, useContext, useReducer,useEffect,FunctionComponen
 import axios from"axios";
 import {Contextstate,actiontype,quizstate } from "../DataTypes/quiz.types";
 
+import { useLogin } from "./Login-context";
+
+
 const initialstate: quizstate = {
   user: { _id: "", name: "", email: "" },
   score: 0,
@@ -110,16 +113,43 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 }
 
 export function Contextprovider({ children }:{children:React.ReactChild}) {
+  const { token, isUserLogIn } = useLogin();
 
   useEffect(()=>{
     (async()=>{
-      const response=await axios.get("https://quiz-backend-demo-1.utpalpati.repl.co/question/");
-      if(response.status===200){
-        dispatch({type:"LOAD",payload:{data:response.data}})
+      try{
+        const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
+        if(response.status===200){
+          dispatch({type:"LOAD",payload:{data:response.data}})
+        }
       }
+      catch(error){
+        console.log(error)
+      }
+     
+      
     })()
     
   },[])
+
+  useEffect(()=>{
+    (async()=>{
+      if(isUserLogIn){
+        try{
+          const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/user/userdetails")
+          if(response.status===200){
+            dispatch({type:"USER",payload:response.data})
+          }
+        }
+        catch(error){
+          console.log(error)
+        }
+      }
+
+    })()
+  },[isUserLogIn])
+
+
   let [
     {
       user,

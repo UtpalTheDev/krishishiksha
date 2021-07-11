@@ -5,13 +5,8 @@ import{AppBar,Toolbar,IconButton,Grid,Button} from "@material-ui/core";
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 export function Navbar() {
   const {user,dispatch} =useReduce();
-  const {isUserLogin,setLogin}=useLogin();
+  const {isUserLogIn,setLogin,logout}=useLogin();
 
-function logout(){
-  localStorage.removeItem("user");
-  dispatch({type:"LOGOUT"});
-  setLogin(false);
-}
 
   return (
     <>
@@ -25,7 +20,11 @@ function logout(){
             </Link>
 
             <Grid item>
-            {isUserLogin && <Button variant="contained" size="small" onClick={logout}>Logout</Button>}
+            {isUserLogIn && <Button variant="contained" size="small" onClick={()=>{
+              dispatch({type:"LOGOUT"})
+              logout()
+              
+            }}>Logout</Button>}
 
             <Link to="/user" style={{textDecoration:"none", color:"inherit"}}><IconButton>
               <AccountCircleRoundedIcon/>

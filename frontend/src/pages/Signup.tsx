@@ -1,34 +1,29 @@
 
-import { useReduce } from "../reducer-context/Reducer-context";
 import { useLogin } from "../reducer-context/Login-context";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
-import {UserState,Servererror } from "../DataTypes/quiz.types";
-
-
+import {UserState,Servererror,LocationState } from "../DataTypes/quiz.types";
 import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
 
 
 export function Signup() {
-  const { dispatch } = useReduce();
-  const { isUserLogin, setLogin } = useLogin();
-  const [Error,setError]=useState(false);
-  const {state} = useLocation();
+  const { isUserLogIn, setLogin } = useLogin();
+  const [Error,setError]=useState<null | string>(null);
+  const location = useLocation();
+  const state=location.state as LocationState
   const navigate = useNavigate();
   const [Loading,setLoading]=useState(false);
   const [name,setname]=useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
-  function navigationcall() {
-    if (isUserLogin) {
-      navigate(state!==null ? state : "/");
-    }
-  }
+
   useEffect(() => {
-    navigationcall();
-  });
+    if (isUserLogIn) {
+      navigate(state?.from ? state.from : "/", { replace: true });
+    }
+  }, [isUserLogIn]);
 
   function emailhandler(event: React.ChangeEvent<HTMLInputElement>) {
     setemail(event.target.value);
@@ -40,42 +35,22 @@ export function Signup() {
     setname(event.target.value);
   }
 
-  async function verify(): Promise<UserState | Servererror> {
+
+  async function signupHandler() {
+
     try {
       let response = await axios.post(
-        "https://quiz-backend-demo-1.utpalpati.repl.co/user/save",
-        { name: name, email: email, password: password }
+        "https://quiz-backend-demo-2.utpalpati.repl.co/signup",
+        { user: { name, email, password } }
       );
-      console.log("verify success",response)
-      setError(false);
-      return response.data;
-    } catch (error) {
-      console.log("verify error")
-      setError(true);
-      if (axios.isAxiosError(error)) {
-        let servererror = error as AxiosError<Servererror>;
-        if (servererror && servererror.response) {
-          return servererror.response.data;
-        }
+      if (response.status === 200) {
+        setError("");
+        navigate("/login");
       }
-      return { errormessage: "something wrong" };
+    } catch (error) {
+      setError(error.response.data.message);
     }
-  }
-  async function userassign() {
-    setLoading(true);
-    if(name!==""&&email!==""&&password!==""){
-    let userdata = await verify();
-    setLoading(false)
-    userdata===null?setError(true):setError(false)
-    if (userdata!==null && "name" in userdata) {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ userid: userdata._id, login: true })
-      );
-      dispatch({ type: "USER", payload: userdata });
-      setLogin((prev) => !prev);
-    }
-  }
+
   }
   return (
     
@@ -90,7 +65,7 @@ export function Signup() {
         <TextField 
         required
         id="standard-basic" 
-        error={Error}
+        error={Error!==null?true:false}
         value={name}  
         label="Name"
          onChange={namehandler}/>
@@ -100,7 +75,7 @@ export function Signup() {
         <TextField 
         required
         id="standard-basic" 
-        error={Error}
+        error={Error!==null?true:false}
         value={email}  
         label="Email Id"
          onChange={emailhandler}/>
@@ -108,7 +83,7 @@ export function Signup() {
     
         <Grid item>
         <TextField
-        error={Error}
+        error={Error!==null?true:false}
           required
           label="Password"
           value={password}
@@ -136,7 +111,7 @@ export function Signup() {
                 color="primary"
                 variant="contained"
                 onClick={() => {
-                    userassign();
+                    signupHandler();
                 }}
                 >
                 Go

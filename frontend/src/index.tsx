@@ -9,13 +9,13 @@ import {Loginprovider} from "./reducer-context/Login-context";
 import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
+    <Loginprovider>
     <Contextprovider>
-      <Loginprovider>
-      <Router>
         <App />
-      </Router>
-      </Loginprovider>
     </Contextprovider>
+    </Loginprovider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

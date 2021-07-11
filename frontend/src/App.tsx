@@ -1,8 +1,10 @@
 import "./App.css";
 
 
+
  import { Routes, Route } from "react-router-dom";
  import { Privateroute } from "./Privateroute";
+
 
 import {Question,Login,LearningGraph,Home,User,Signup } from "./pages"
 import {Navbar} from "./components"

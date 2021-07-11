@@ -26,7 +26,11 @@ console.log("here me",user);
             </Link>
 
             <Grid item>
-            {isUserLogIn && <Button variant="contained" size="small" onClick={()=>{logout()}}>Logout</Button>}
+            {isUserLogIn && <Button variant="contained" size="small" onClick={()=>{
+              dispatch({type:"LOGOUT"})
+              logout()
+              
+            }}>Logout</Button>}
 
             <Link to="/user" style={{textDecoration:"none", color:"inherit"}}><IconButton>
               <AccountCircleRoundedIcon/>

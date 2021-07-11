@@ -157,13 +157,38 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
 
   useEffect(()=>{
     (async()=>{
-      const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
-      if(response.status===200){
-        dispatch({type:"LOAD",payload:{data:response.data}})
+      try{
+        const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
+        if(response.status===200){
+          dispatch({type:"LOAD",payload:{data:response.data}})
+        }
       }
+      catch(error){
+        console.log(error)
+      }
+     
+      
     })()
     
   },[])
+  useEffect(()=>{
+    (async()=>{
+      if(isUserLogIn){
+        try{
+          console.log("isuserlogin",isUserLogIn)
+          const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/user/userdetails")
+          if(response.status===200){
+            dispatch({type:"USER",payload:response.data})
+          }
+        }
+        catch(error){
+          console.log(error)
+        }
+      }
+
+    })()
+  },[isUserLogIn])
+
   console.log("reduce context")
   let [
     {

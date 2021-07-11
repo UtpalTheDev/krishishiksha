@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useReducer,useEffect,FunctionComponent} from "react";
 import axios from"axios";
 import {Contextstate,actiontype,quizstate } from "../DataTypes/quiz.types";
+
 import { useLogin } from "./Login-context";
+
 
 const initialstate: quizstate = {
   user: { _id: "", name: "", email: "" },
@@ -129,6 +131,7 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
     })()
     
   },[])
+
   useEffect(()=>{
     (async()=>{
       if(isUserLogIn){
@@ -145,6 +148,7 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
 
     })()
   },[isUserLogIn])
+
 
   let [
     {

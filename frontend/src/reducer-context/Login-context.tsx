@@ -12,6 +12,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
   const [token, setToken] = useState<null|String>(null);
   const navigate = useNavigate();
 
+
   function setupAuthExceptionHandler(logoutUser:Function, navigate:NavigateFunction) {
     const UNAUTHORIZED = 401;
     axios.interceptors.response.use(
@@ -20,6 +21,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
         if (error?.response?.status === UNAUTHORIZED) {
           logoutUser();
           navigate("login");
+
         }
         return Promise.reject(error);
       }
@@ -32,6 +34,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
     delete axios.defaults.headers.common["Authorization"];
   }
   useEffect(() => {
+
     const localgetdata=localStorage?.getItem("login")
     const localParseData =
       localgetdata!==null ?
@@ -42,6 +45,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
     }
     
     setupAuthExceptionHandler(logout, navigate);
+
   }, []);
  
   async function LoginWithCredentials(email:String, password:String) {

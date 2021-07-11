@@ -18,6 +18,7 @@ export function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
+
   useEffect(() => {
     if (isUserLogIn) {
       navigate(state?.from ? state.from : "/", { replace: true });
@@ -34,7 +35,9 @@ export function Signup() {
     setname(event.target.value);
   }
 
+
   async function signupHandler() {
+
     try {
       let response = await axios.post(
         "https://quiz-backend-demo-2.utpalpati.repl.co/signup",
@@ -47,6 +50,7 @@ export function Signup() {
     } catch (error) {
       setError(error.response.data.message);
     }
+
   }
   return (
     

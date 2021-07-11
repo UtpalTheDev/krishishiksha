@@ -23,6 +23,7 @@ export function User() {
     ]
   ];
 
+
   useEffect(() => {
     (async function () {
       try {
@@ -32,6 +33,7 @@ export function User() {
             userid: user._id
           }
         );
+
         if (response.status === 200) {
           response.data.map((item:any, index:any) => {
             item[0] = new Date(item[0]);

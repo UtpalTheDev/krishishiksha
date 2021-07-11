@@ -1,28 +1,8 @@
 import React, { createContext, useContext, useReducer,useEffect,FunctionComponent} from "react";
 import axios from"axios";
-// import { quizdata } from "../Data/getQuiz";
 import {Contextstate,actiontype,quizstate } from "../DataTypes/quiz.types";
-import { JsxElement } from "typescript";
 import { useLogin } from "./Login-context";
 
-// type statustype = "starting" | "finished" | "Running";
-// type UserState = {
-//   _id: string;
-//   name: string;
-//   email: string;
-// };
-
-// type quizstate = {
-//   user: UserState;
-//   score: number;
-//   status: statustype;
-//   currentQsnNo: number;
-//   currentquiz: string;
-//   correct: number;
-//   wrong: number;
-//   data: Quizdata;
-//   categorydata: string[];
-// };
 const initialstate: quizstate = {
   user: { _id: "", name: "", email: "" },
   score: 0,
@@ -34,32 +14,10 @@ const initialstate: quizstate = {
   data: {},
   categorydata: []
 };
-// type actiontype =
-//   | {type:  "LOAD"; payload:{data:Quizdata} }
-//   | { type: "RESET" }
-//   | { type: "INCREMENT_SCORE"; payload: { score: number } }
-//   | { type: "DECREMENT_SCORE"; payload: { score: number } }
-//   | { type: "SKIP" }
-//   | { type: "USER"; payload: UserState }
-//   | { type: "CURRENTQUIZ"; payload: string }
-//   | {type: "LOGOUT"}
-// type Contextstate = {
-//   user: UserState;
-//   score: number;
-//   status: statustype;
-//   currentQsnNo: number;
-//   currentquiz: string;
-//   correct: number;
-//   wrong: number;
-//   data: Quizdata;
-//   categorydata: string[];
-//   dispatch: React.Dispatch<actiontype>;
-// };
 
 export const Reducercontext = createContext({} as Contextstate);
 
 function quizreducer(state: quizstate, action: actiontype): quizstate {
-  console.log("reducer");
   switch (action.type) {
     case "LOAD": 
       return{...state, data:action.payload.data}
@@ -175,7 +133,6 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
     (async()=>{
       if(isUserLogIn){
         try{
-          console.log("isuserlogin",isUserLogIn)
           const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/user/userdetails")
           if(response.status===200){
             dispatch({type:"USER",payload:response.data})
@@ -189,7 +146,6 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
     })()
   },[isUserLogIn])
 
-  console.log("reduce context")
   let [
     {
       user,
@@ -204,7 +160,6 @@ export function Contextprovider({ children }:{children:React.ReactChild}) {
     },
     dispatch
   ] = useReducer(quizreducer, initialstate);
-  // console.log("kljj",categorydata)
   return (
     <Reducercontext.Provider
       value={{

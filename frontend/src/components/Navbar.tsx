@@ -7,12 +7,6 @@ export function Navbar() {
   const {user,dispatch} =useReduce();
   const {isUserLogIn,setLogin,logout}=useLogin();
 
-// function logout(){
-//   localStorage.removeItem("user");
-//   dispatch({type:"LOGOUT"});
-//   setLogin(false);
-// }
-console.log("here me",user);
 
   return (
     <>

@@ -1,21 +1,9 @@
 import "./App.css";
-
-import { useReduce } from "./reducer-context/Reducer-context";
-
-// import { Question } from "./pages/Question";
- import { Routes, Route } from "react-router-dom";
-// import { Login } from "./pages/Login";
-// import { Home } from "./pages/Home";
- import { Privateroute } from "./Privateroute";
-// import { Learninggraph } from "./pages/Learninggraph";
- //import { Navbar } from "./components/Navbar";
-// import { User } from "./pages/User";
-// import {Signup} from "./pages/Signup";
+import { Routes, Route } from "react-router-dom";
+import { Privateroute } from "./Privateroute";
 import {Question,Login,LearningGraph,Home,User,Signup } from "./pages"
 import {Navbar} from "./components"
 export default function App() {
-  console.log("render");
-  console.log(useReduce());
   return (
     <div className="App">
       <Navbar />

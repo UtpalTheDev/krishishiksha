@@ -22,13 +22,9 @@ export function User() {
       { type: "number", id: "Won/Loss" }
     ]
   ];
-console.log("yearly",yearlyperf);
-console.log("daily",dailyperf);
-console.log("monthly",monthlyperf);
 
   useEffect(() => {
     (async function () {
-      console.log("id", user._id);
       try {
         let response = await axios.post(
           "https://quiz-backend-demo-2.utpalpati.repl.co/data/attendance",
@@ -36,7 +32,6 @@ console.log("monthly",monthlyperf);
             userid: user._id
           }
         );
-        console.log("response", response.data);
         if (response.status === 200) {
           response.data.map((item:any, index:any) => {
             item[0] = new Date(item[0]);

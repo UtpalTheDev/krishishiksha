@@ -1,17 +1,13 @@
 
-import { useReduce } from "../reducer-context/Reducer-context";
 import { useLogin } from "../reducer-context/Login-context";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import {UserState,Servererror,LocationState } from "../DataTypes/quiz.types";
-
-
 import {Button,Box,Grid,TextField,CircularProgress} from "@material-ui/core";
 
 
 export function Signup() {
-  const { dispatch } = useReduce();
   const { isUserLogIn, setLogin } = useLogin();
   const [Error,setError]=useState<null | string>(null);
   const location = useLocation();
@@ -22,23 +18,12 @@ export function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
-  console.log("navigation",state);
-  // function navigationcall() {
-  //   if (isUserLogin) {
-  //     navigate(state!==null ? state : "/");
-  //   }
-  // }
-  // useEffect(() => {
-  //   navigationcall();
-  // });
   useEffect(() => {
     if (isUserLogIn) {
       navigate(state?.from ? state.from : "/", { replace: true });
     }
   }, [isUserLogIn]);
 
-  // navigationcall();
-console.log("error",Error);
   function emailhandler(event: React.ChangeEvent<HTMLInputElement>) {
     setemail(event.target.value);
   }
@@ -49,53 +34,6 @@ console.log("error",Error);
     setname(event.target.value);
   }
 
-  // type User = {
-  //   _id: string;
-  //   name: string;
-  //   email: string;
-  // };
-  // type Servererror = {
-  //   errormessage: string;
-  // };
-
-  // async function verify(): Promise<UserState | Servererror> {
-  //   try {
-  //     let response = await axios.post(
-  //       "https://quiz-backend-demo-1.utpalpati.repl.co/user/save",
-  //       { name: name, email: email, password: password }
-  //     );
-  //     console.log("verify success",response)
-  //     setError(false);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log("verify error")
-  //     setError(true);
-  //     if (axios.isAxiosError(error)) {
-  //       let servererror = error as AxiosError<Servererror>;
-  //       if (servererror && servererror.response) {
-  //         return servererror.response.data;
-  //       }
-  //     }
-  //     return { errormessage: "something wrong" };
-  //   }
-  // }
-  // async function userassign() {
-  //   setLoading(true);
-  //   if(name!==""&&email!==""&&password!==""){
-  //   let userdata = await verify();
-  //   setLoading(false)
-  //   userdata===null?setError(true):setError(false)
-  //   if (userdata!==null && "name" in userdata) {
-  //     localStorage.setItem(
-  //       "user",
-  //       JSON.stringify({ userid: userdata._id, login: true })
-  //     );
-  //     dispatch({ type: "USER", payload: userdata });
-  //     setLogin((prev) => !prev);
-  //   }
-  //   console.log(userdata);
-  // }
-  // }
   async function signupHandler() {
     try {
       let response = await axios.post(

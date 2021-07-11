@@ -46,7 +46,7 @@ export function Question() {
       if (status === "finished") {
         try {
           let response = await axios.post(
-            "https://quiz-backend-demo-1.utpalpati.repl.co/data/save",
+            "https://quiz-backend-demo-2.utpalpati.repl.co/data/save",
             {
               userid: user._id,
               quizdata: {

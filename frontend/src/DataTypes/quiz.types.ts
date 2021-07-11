@@ -64,6 +64,12 @@ export type actiontype =
   };
 
   export type Logincontextstate = {
-    isUserLogin: boolean;
-    setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+    isUserLogIn: boolean,
+    setLogin: React.Dispatch<React.SetStateAction<boolean>>,
+    logout:Function,
+    token:String|null,
+    LoginWithCredentials:Function
+  };
+  export type LocationState = {
+    from: string;
   };

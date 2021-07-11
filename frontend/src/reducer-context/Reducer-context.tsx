@@ -3,6 +3,7 @@ import axios from"axios";
 // import { quizdata } from "../Data/getQuiz";
 import {Contextstate,actiontype,quizstate } from "../DataTypes/quiz.types";
 import { JsxElement } from "typescript";
+import { useLogin } from "./Login-context";
 
 // type statustype = "starting" | "finished" | "Running";
 // type UserState = {
@@ -152,10 +153,11 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 }
 
 export function Contextprovider({ children }:{children:React.ReactChild}) {
+  const { token, isUserLogIn } = useLogin();
 
   useEffect(()=>{
     (async()=>{
-      const response=await axios.get("https://quiz-backend-demo-1.utpalpati.repl.co/question/");
+      const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
       if(response.status===200){
         dispatch({type:"LOAD",payload:{data:response.data}})
       }

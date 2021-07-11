@@ -3,7 +3,8 @@ import { useReduce } from "./Reducer-context";
 import axios, { AxiosError } from "axios";
 import { JsxElement } from "typescript";
 import {UserState, Servererror,Logincontextstate} from "../DataTypes/quiz.types";
-
+import { useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom/node_modules/react-router";
 // type Logincontextstate = {
 //   isUserLogin: boolean;
 //   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,67 +12,138 @@ import {UserState, Servererror,Logincontextstate} from "../DataTypes/quiz.types"
 const Logincontext = createContext({} as Logincontextstate);
 
 export function Loginprovider({ children }: { children: React.ReactChild }) {
-  let { dispatch } = useReduce();
-  const [isUserLogin, setLogin] = useState(false);
+  // let { dispatch } = useReduce();
+  // const [isUserLogin, setLogin] = useState(false);
 
-  // type Servererror = {
-  //   errormessage: string;
-  // };
-  // type User = {
-  //   _id: string;
-  //   name: string;
-  //   email: string;
-  // };
-  async function verify(id: string): Promise<UserState | Servererror> {
+  // // type Servererror = {
+  // //   errormessage: string;
+  // // };
+  // // type User = {
+  // //   _id: string;
+  // //   name: string;
+  // //   email: string;
+  // // };
+  // async function verify(id: string): Promise<UserState | Servererror> {
+  //   try {
+  //     let response = await axios.post(
+  //       "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithtoken",
+  //       { userid: id }
+  //     );
+  //     return response.data;
+  //   } catch (error) {
+  //     if (axios.isAxiosError(error)) {
+  //       let servererror = error as AxiosError<Servererror>;
+  //       if (servererror && servererror.response) {
+  //         return servererror.response.data;
+  //       }
+  //     }
+  //     return { errormessage: "something wrong" };
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   console.log("running localstorage extraction");
+  //   (async function () {
+  //     try {
+  //       const localgetdata = localStorage?.getItem("user");
+  //       const localparsedata =
+  //         localgetdata !== null ? JSON.parse(localgetdata) : {};
+  //        console.log("parsedata success", localparsedata);
+
+  //       if ("login" in localparsedata) {
+  //         let userdata = await verify(localparsedata.userid);
+  //         console.log("userdata", userdata);
+  //         if ("name" in userdata) {
+  //           //console.log("parsedata success");
+
+  //           dispatch({ type: "USER", payload: userdata });
+  //           setLogin(true);
+  //         }
+  //       } else {
+  //         setLogin(false);
+  //       }
+  //     } catch (error) {
+  //       console.log("locastorage error", error);
+  //     }
+  //   })();
+  // }, []);
+  const [isUserLogIn, setLogin] = useState<boolean>(false);
+  const [token, setToken] = useState<null|String>(null);
+  const navigate = useNavigate();
+
+  function setupAuthExceptionHandler(logoutUser:Function, navigate:NavigateFunction) {
+    const UNAUTHORIZED = 401;
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error?.response?.status === UNAUTHORIZED) {
+          logoutUser();
+          navigate("login");
+        }
+        return Promise.reject(error);
+      }
+    );
+  }
+  function setupAuthHeaderForServiceCalls(token:null|String) {
+    if (token) {
+      return (axios.defaults.headers.common["Authorization"] = token);
+    }
+    delete axios.defaults.headers.common["Authorization"];
+  }
+  useEffect(() => {
+    const localgetdata=localStorage?.getItem("login")
+    const localParseData =
+      localgetdata!==null ?
+      JSON.parse(localgetdata) : {};
+    if ("token" in localParseData) {
+      const {token,isUserLoggedIn}=localParseData
+      isUserLoggedIn && token && loginUser({ token });
+    }
+    
+    setupAuthExceptionHandler(logout, navigate);
+  }, []);
+ 
+  async function LoginWithCredentials(email:String, password:String) {
     try {
       let response = await axios.post(
-        "https://quiz-backend-demo-1.utpalpati.repl.co/user/infowithtoken",
-        { userid: id }
+        "https://quiz-backend-demo-2.utpalpati.repl.co/login",
+        { user: { email, password } }
       );
-      return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        let servererror = error as AxiosError<Servererror>;
-        if (servererror && servererror.response) {
-          return servererror.response.data;
-        }
+
+      if (response.status === 200) {
+        loginUser(response.data);
       }
-      return { errormessage: "something wrong" };
+    } catch (error) {
+      console.log(error.response);
+      console.log("loginwithcredentials error");
+      if(error.response.data?.message){
+        return error.response.data.message;
+      }
+      return error.response.data.error;
     }
   }
-
-  useEffect(() => {
-    console.log("running localstorage extraction");
-    (async function () {
-      try {
-        const localgetdata = localStorage?.getItem("user");
-        const localparsedata =
-          localgetdata !== null ? JSON.parse(localgetdata) : {};
-         console.log("parsedata success", localparsedata);
-
-        if ("login" in localparsedata) {
-          let userdata = await verify(localparsedata.userid);
-          console.log("userdata", userdata);
-          if ("name" in userdata) {
-            //console.log("parsedata success");
-
-            dispatch({ type: "USER", payload: userdata });
-            setLogin(true);
-          }
-        } else {
-          setLogin(false);
-        }
-      } catch (error) {
-        console.log("locastorage error", error);
-      }
-    })();
-  }, []);
-
+  function loginUser({ token }:{token:String}) {
+    setToken(token);
+    setupAuthHeaderForServiceCalls(token);
+    setLogin(true);
+    localStorage?.setItem(
+      "login",
+      JSON.stringify({ isUserLoggedIn: true, token })
+    );
+  }
+  function logout() {
+    localStorage?.removeItem("login");
+    setLogin(false);
+    setToken(null);
+    setupAuthHeaderForServiceCalls(null);
+  }
   return (
     <>
-      <Logincontext.Provider value={{ isUserLogin, setLogin }}>
-        {children}
-      </Logincontext.Provider>
+    <Logincontext.Provider
+      value={{ isUserLogIn, setLogin, logout, token, LoginWithCredentials }}
+    >
+      {children}
+    </Logincontext.Provider>
     </>
   );
 }

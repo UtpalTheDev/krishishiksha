@@ -31,7 +31,7 @@ console.log("monthly",monthlyperf);
       console.log("id", user._id);
       try {
         let response = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/attendance",
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/attendance",
           {
             userid: user._id
           }
@@ -46,7 +46,7 @@ console.log("monthly",monthlyperf);
         }
 
         let monthlydata = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/monthlyperformance",
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/monthlyperformance",
           {
             userid: user._id
           }
@@ -60,7 +60,7 @@ console.log("monthly",monthlyperf);
           }
         }
         let yearlydata = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/yearlyperformance",
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/yearlyperformance",
           {
             userid: user._id
           }
@@ -74,7 +74,7 @@ console.log("monthly",monthlyperf);
           }
         }
         let dailydata = await axios.post(
-          "https://quiz-backend-demo-1.utpalpati.repl.co/data/dailyperformance",
+          "https://quiz-backend-demo-2.utpalpati.repl.co/data/dailyperformance",
           {
             userid: user._id
           }

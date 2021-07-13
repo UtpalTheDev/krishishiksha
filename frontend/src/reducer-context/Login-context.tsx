@@ -14,7 +14,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
   const navigate = useNavigate();
 
 
-  function setupAuthExceptionHandler(logoutUser:Function, navigate:NavigateFunction) {
+  function setupAuthExceptionHandler(logoutUser:()=>void, navigate:NavigateFunction) {
     const UNAUTHORIZED = 401;
     axios.interceptors.response.use(
       (response) => response,

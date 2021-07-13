@@ -12,6 +12,8 @@ export function Header() {
 
   return (
     <Box textAlign="center">
+      {data[currentquiz]!==undefined && (
+      <>
       <h3>welcome-{user.name}</h3>
     <Grid container justify="space-between" alignItems="center">
       
@@ -29,6 +31,9 @@ export function Header() {
       )}
     </Grid>
     <h3>{data[currentquiz].quizName}</h3>
+    </>
+      )
+    }
     </Box>
   );
 }

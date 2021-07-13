@@ -15,7 +15,7 @@ export function LearningGraph() {
         let response = await axios.post(
           "https://quiz-backend-demo-2.utpalpati.repl.co/data/stat",
           {
-            category: currentquiz
+            category: category
           }
         );
         if (response.status === 200&&response?.data[0]) {

@@ -9,6 +9,7 @@ const Logincontext = createContext({} as Logincontextstate);
 export function Loginprovider({ children }: { children: React.ReactChild }) {
  
   const [isUserLogIn, setLogin] = useState<boolean>(false);
+  const [loading,setLoading]=useState<boolean>(false);
   const [token, setToken] = useState<null|String>(null);
   const navigate = useNavigate();
 
@@ -50,6 +51,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
  
   async function LoginWithCredentials(email:String, password:String) {
     try {
+      setLoading(true)
       let response = await axios.post(
         "https://quiz-backend-demo-2.utpalpati.repl.co/login",
         { user: { email, password } }
@@ -58,7 +60,9 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
       if (response.status === 200) {
         loginUser(response.data);
       }
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.log(error.response);
       console.log("loginwithcredentials error");
       if(error.response.data?.message){
@@ -85,7 +89,7 @@ export function Loginprovider({ children }: { children: React.ReactChild }) {
   return (
     <>
     <Logincontext.Provider
-      value={{ isUserLogIn, setLogin, logout, token, LoginWithCredentials }}
+      value={{ isUserLogIn, setLogin, logout, token, LoginWithCredentials,loading,setLoading }}
     >
       {children}
     </Logincontext.Provider>

@@ -71,6 +71,7 @@ export function Signup() {
         value={name}  
         label="Name"
          onChange={namehandler}/>
+         <div style={{fontSize:"11px",color:"gray"}}>Name must be 6 characters in length</div>
          </Grid> 
 
         <Grid item>    
@@ -92,7 +93,9 @@ export function Signup() {
           type="password"
           value={password}
           onChange={passwordhandler}
-        /></Grid>
+        />
+        <div style={{fontSize:"11px",color:"gray"}}>password must be 6 characters in length</div>
+        </Grid>
         <Grid container justify="center" alignItems="center" spacing={2}>
                 <Grid item>
                 <Button
@@ -126,6 +129,7 @@ export function Signup() {
         
         </Grid>
         </Grid>
+        {Error}
         </form>
         {loading&&<CircularProgress/>}
       </Box>

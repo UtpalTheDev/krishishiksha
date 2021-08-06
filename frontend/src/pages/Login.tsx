@@ -11,8 +11,8 @@ export function Login() {
   let location = useLocation();
   const state = location.state as LocationState
   let navigate = useNavigate();
-  let [email, setemail] = useState("");
-  let [password, setpassword] = useState("");
+  let [email, setemail] = useState("testing@gmail.com");
+  let [password, setpassword] = useState("123456");
 
 
 
@@ -61,7 +61,10 @@ export function Login() {
           value={password}
           type="password"
           onChange={passwordhandler}
-        /></Grid>
+        />
+        <div style={{fontSize:"11px",color:"gray"}}>Password must be 6 characters in length</div>
+
+        </Grid>
         <Grid container justify="center" alignItems="center" spacing={2}>
                 <Grid item>
                 <Button
@@ -92,10 +95,11 @@ export function Login() {
         
         </Grid>
         </Grid>
+        {Error}  
         </form>
 
         {loading&&<CircularProgress/>}
-
+              
       </Box>
     </>
   );

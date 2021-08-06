@@ -75,6 +75,7 @@ export function User() {
 
       } catch (error) {
         console.log("attendancerror", error);
+        setattendancedata("No Data")
       }
     })();
   }, [user]);
@@ -88,8 +89,10 @@ export function User() {
 
       <Grid item style={{textAlign:"center"}}> <div>Activity</div></Grid>
 
-     <Grid item style={{overflowX:"auto",width:"inherit",justifyContent:"center"}}>{!attendancedata && "Loading"}
-      {attendancedata && (
+     <Grid item style={{overflowX:"auto",width:"inherit",justifyContent:"center"}}>
+       {!attendancedata && "Loading"}
+       <div style={{textAlign:"center"}}>{attendancedata==="No Data" && "No Data"}</div>
+      {attendancedata!=="No Data" && attendancedata!==null && (
         <Chart
           width={"950px"}
           height={"200px"}

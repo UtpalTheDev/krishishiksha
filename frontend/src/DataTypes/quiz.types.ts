@@ -66,9 +66,9 @@ export type actiontype =
   export type Logincontextstate = {
     isUserLogIn: boolean,
     setLogin: React.Dispatch<React.SetStateAction<boolean>>,
-    logout:()=>void,
+    logout:Function,
     token:String|null,
-    LoginWithCredentials:()=>void,
+    LoginWithCredentials:Function,
     loading:boolean,
     setLoading:React.Dispatch<React.SetStateAction<boolean>>
   };

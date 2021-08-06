@@ -25,17 +25,18 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
     };
   }, [dispatch, time]);
 
-  let { question, options, points } = typedata.questions[currentQsnNo - 1];
+  let qsnData= typedata?.questions[currentQsnNo - 1];
+  
 
   return (
     <>
-      <Box textAlign="center" style={{width:"100%"}}>
-        <div style={{fontSize:"18px"}}>{question}</div>
+      { qsnData!==undefined &&( <Box textAlign="center" style={{width:"100%"}}> 
+        <div style={{fontSize:"18px"}}>{qsnData.question}</div>
         <br/>
         <CircularProgressWithLabel value={(time/totaltime)*100} total={totaltime} />
-        <h6>Number of point- {points}</h6>
+        <h6>Number of point- {qsnData.points}</h6>
         <Grid container justify="center" >
-          {options.map((item, index) => {
+          {qsnData.options.map((item, index) => {
             return (
               
                 <Grid item xs={10} sm={5} md={4} lg={3} style={{margin:"1rem 0.5rem"}}>
@@ -47,13 +48,13 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
                       if (item.isRight === false) {
                         dispatch({
                           type: "DECREMENT_SCORE",
-                          payload: { score: points }
+                          payload: { score: qsnData.points }
                         });
                         settime(15);
                       } else {
                         dispatch({
                           type: "INCREMENT_SCORE",
-                          payload: { score: points }
+                          payload: { score: qsnData.points }
                         });
                         settime(15);
                       }
@@ -83,6 +84,8 @@ export function Qsnblock({ typedata }: { typedata: quiz }) {
         
         </Grid>
       </Box>
+      )
+}
     </>
   );
 }

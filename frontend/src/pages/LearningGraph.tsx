@@ -15,28 +15,35 @@ export function LearningGraph() {
         let response = await axios.post(
           "https://quiz-backend-demo-2.utpalpati.repl.co/data/stat",
           {
-            category: currentquiz
+            category: category
           }
         );
-        if (response.status === 200&&response?.data[0]) {
+        console.log(response)
+        if (response.status === 200 && response?.data[0]) {
           setstatdata([...initialdata, ...response.data]);
         }
+        // else{
+        //   setstatdata("No Data")
+        // }
+        
         return () => {
           setstatdata(null);
         };
       } catch (error) {
         console.log("grapherror", error);
+        setstatdata("No Data")
       }
     })();
   }, [user]);
   
   return (
     <>
-      <h3>{category} Learning Graph</h3>
+      <div style={{paddingLeft:"0.5rem"}}><h3>{category} Learning Graph</h3></div>
       <Box textAlign="center">
       <div>Past 7days data</div>
-      {!statdata && "loading"}
-      {statdata && (
+      {statdata===null && "loading"}
+      {statdata==="No Data" && statdata}
+      {statdata!=="No Data"&& statdata!==null && (
         <Chart
           style={{ minWidth: "400px", width: "100%", height: "300px" }}
           chartType="LineChart"

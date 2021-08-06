@@ -113,18 +113,21 @@ function quizreducer(state: quizstate, action: actiontype): quizstate {
 }
 
 export function Contextprovider({ children }:{children:React.ReactChild}) {
-  const { token, isUserLogIn } = useLogin();
+  const { token, isUserLogIn,loading,setLoading } = useLogin();
 
   useEffect(()=>{
     (async()=>{
       try{
+        setLoading(true)
         const response=await axios.get("https://quiz-backend-demo-2.utpalpati.repl.co/question/");
         if(response.status===200){
           dispatch({type:"LOAD",payload:{data:response.data}})
         }
+        setLoading(false)
       }
       catch(error){
-        console.log(error)
+        console.log(error);
+        setLoading(false)
       }
      
       

@@ -90,7 +90,7 @@ export function User() {
       <Grid item style={{textAlign:"center"}}> <div>Activity</div></Grid>
 
      <Grid item style={{overflowX:"auto",width:"inherit",justifyContent:"center"}}>
-       {!attendancedata && "Loading"}
+     <div style={{textAlign:"center"}}>{!attendancedata && "Loading"}</div>
        <div style={{textAlign:"center"}}>{attendancedata==="No Data" && "No Data"}</div>
       {attendancedata!=="No Data" && attendancedata!==null && (
         <Chart
